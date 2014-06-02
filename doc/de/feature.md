@@ -1,6 +1,6 @@
 # Ticket als gelesen/ungelesen markieren
 
-Im OTRS Standard ist es nicht möglich Tickets, also alle ungeselesen Artikel eines Tickets, als gelesen zu markieren. Ebenfalls ist es nicht möglich Tickets oder einzelne Artikel wieder als ungelesen zu markieren. Diese Paket erweitert das System um die Funktionalität komplette Tickets oder einzelne Artikel als gelesen oder ungelesen zu markieren.
+Im OTRS Standard ist es nicht möglich Tickets, also alle ungeselesen Artikel eines Tickets, als gelesen zu markieren. Ebenfalls ist es nicht möglich Tickets oder einzelne Artikel wieder als ungelesen zu markieren. Dieses Paket erweitert das System um die Funktionalität komplette Tickets oder einzelne Artikel als gelesen oder ungelesen zu markieren.
 
 Um eine der beiden neuen Funktionalitäten zu nutzen, stehen im Ticket- und Artikel-Menü entsprechende Links um das Ticket oder den Artikel als "gelesen markieren" oder "ungelesen markieren". Im Artikel-Menü steht nur der "ungelesen markieren"-Link zur Verfügung, da der Artikel beim lesen automatisch als gelesen markiert wird.
 

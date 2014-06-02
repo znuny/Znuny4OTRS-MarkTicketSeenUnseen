@@ -151,7 +151,7 @@
         </Setting>
     </ConfigItem>
     <ConfigItem Name="Ticket::Frontend::PreMenuModule###442-MarkTicketSeen" Required="0" Valid="1">
-        <Description Translatable="1">This configuration registers a link in the ticket menu to the ticket overviews of the agent interface to mark ticket as seen.</Description>
+        <Description Translatable="1">This configuration registers a link in the ticket menu to the ticket overviews of the agent interface to mark all articles of the ticket as seen.</Description>
         <Group>Znuny4OTRS-MarkTicketSeenUnseen</Group>
         <SubGroup>Frontend::Agent::Ticket::MenuModulePre</SubGroup>
         <Setting>
