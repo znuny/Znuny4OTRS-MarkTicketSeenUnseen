@@ -1,9 +1,9 @@
 # --
-# Kernel/Output/HTML/OutputFilterZnuny4OTRSMarkTicketAsSeenUnseenBulk.pm - adds a the 'Mark tickets as seen' and 'Mark tickets as unseen' selections to the buk action view
+# Kernel/Output/HTML/OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulk.pm - adds a the 'Mark tickets as seen' and 'Mark tickets as unseen' selections to the buk action view
 # Copyright (C) 2014 Znuny GmbH, http://znuny.com/
 # --
 
-package Kernel::Output::HTML::OutputFilterZnuny4OTRSMarkTicketAsSeenUnseenBulk;
+package Kernel::Output::HTML::OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulk;
 
 use strict;
 use warnings;
