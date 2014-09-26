@@ -50,7 +50,7 @@ sub Run {
                         <div class="Clear"></div>
 HTML
 
-        ${ $Param{Data} } =~ s{(</div>)[^<]+(</fieldset>)}{$1$ElementHTML$2}xms;
+        ${ $Param{Data} } =~ s{(</fieldset>[^<]+</div>[^<]+</div>[^<]+<div \s class="Footer")}{$ElementHTML$1}xms;
     }
 
     return 1;
