@@ -107,7 +107,7 @@ sub Run {
 
             if ( !$Success ) {
                 $Self->{LayoutObject}->FatalError(
-                    Message => "Error while setting ticket with TicketID '$TicketID' as".
+                    Message => "Error while setting ticket with TicketID '$TicketID' as ".
                                 ( lc $ParamFlagMapping{ $CurrentParam } ) .
                                 "!",
                 );
