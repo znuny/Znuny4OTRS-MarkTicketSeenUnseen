@@ -2,7 +2,7 @@
 
 Mark Ticket Seen/Unseen
 =================
-With this extention you will be able to mark whole tickets as seen or unseen and articles as unseen again. It's possible to mark single tickets or multiple tickets via the bulk action.
+With this extension you will be able to mark whole tickets as seen or unseen and articles as unseen again. It's possible to mark single tickets or multiple tickets via the bulk action.
 
 **Prerequisites**
 
@@ -28,10 +28,10 @@ For download see [http://znuny.com/en/#!/addons](http://znuny.com/en/#!/addons)
 
 **Commercial Support**
 
-For this extension and for OTRS in general visit [http://znuny.com](http://znuny.com). Looking forward to hear from you!
+For this extension and for OTRS in general visit [http://znuny.com/](http://znuny.com/). Looking forward to hear from you!
 
 Enjoy!
 
  Your Znuny Team!
 
- [http://znuny.com](http://znuny.com)
+ [http://znuny.com/](http://znuny.com/)
