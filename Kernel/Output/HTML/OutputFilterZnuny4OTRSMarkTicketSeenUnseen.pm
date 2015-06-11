@@ -2,11 +2,18 @@
 # Kernel/Output/HTML/OutputFilterZnuny4OTRSMarkTicketSeenUnseen.pm - adds a 'Mark article as unseen' link to the article menu
 # Copyright (C) 2014 Znuny GmbH, http://znuny.com/
 # --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
 
 package Kernel::Output::HTML::OutputFilterZnuny4OTRSMarkTicketSeenUnseen;
 
 use strict;
 use warnings;
+
+our @ObjectDependencies = (
+);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -23,11 +30,11 @@ sub Run {
 
     my $LinkHTML = <<'HTML';
                 <li>
-                    <a href="$Env{"Baselink"}Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=$QData{"TicketID"};ArticleID=$QData{"ArticleID"}" title="$Text{"Mark article as unseen"}">$Text{"Mark unseen"}</a>
+                    <a href="[% Env("Baselink") %]Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %];ArticleID=[% Data.ArticleID | html %]" title="[% Translate("Mark article as unseen") | html %]">[% Translate("Mark unseen") | html %]</a>
                 </li>
 HTML
 
-    ${ $Param{Data} } =~ s{(<!-- \s+ dtl:block:ArticleMenu-->)}{$LinkHTML$1}xms;
+    ${ $Param{Data} } =~ s{( <ul \s class="Actions"> )}{$1$LinkHTML}xms;
 
     return 1;
 }

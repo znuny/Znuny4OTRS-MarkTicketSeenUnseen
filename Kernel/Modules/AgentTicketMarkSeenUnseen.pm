@@ -2,6 +2,10 @@
 # Kernel/Modules/AgentTicketMarkSeenUnseen.pm - to mark tickets and articles as seen or unseen
 # Copyright (C) 2014 Znuny GmbH, http://znuny.com/
 # --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
 
 package Kernel::Modules::AgentTicketMarkSeenUnseen;
 
@@ -20,7 +24,7 @@ sub new {
     # check all needed objects
     for (qw(TicketObject ParamObject LayoutObject ConfigObject LogObject UserObject)) {
         if ( !$Self->{$_} ) {
-            $Self->{LayoutObject}->FatalError( Message => "Got no $_!" );
+            $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError( Message => "Got no $_!" );
         }
     }
 
@@ -30,16 +34,23 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+
+
     my %GetParam;
     for my $Param ( qw(TicketID ArticleID Subaction) ) {
 
-        $GetParam{ $Param } = $Self->{ParamObject}->GetParam( Param => $Param );
+        $GetParam{ $Param } = $ParamObject->GetParam( Param => $Param );
     }
 
     for my $RequiredParam ( qw(TicketID Subaction) ) {
 
         if ( !$GetParam{ $RequiredParam } ) {
-            $Self->{LayoutObject}->FatalError(
+            $LayoutObject->FatalError(
                 Message => "Need $RequiredParam!",
             );
         }
@@ -47,12 +58,12 @@ sub Run {
 
     if ( !scalar grep { $GetParam{Subaction} eq $_ } qw( Seen Unseen ) ) {
 
-        $Self->{LayoutObject}->FatalError(
+        $LayoutObject->FatalError(
             Message => "Invalid value '$GetParam{Subaction}' for parameter 'Subaction'!",
         );
     }
 
-    my @ArticleIDs = $Self->{TicketObject}->ArticleIndex(
+    my @ArticleIDs = $TicketObject->ArticleIndex(
         TicketID => $GetParam{TicketID},
     );
 
@@ -60,7 +71,7 @@ sub Run {
 
         if ( !scalar grep { $GetParam{ArticleID} eq $_ } @ArticleIDs ) {
 
-            $Self->{LayoutObject}->FatalError(
+            $LayoutObject->FatalError(
                 Message => "Can't find ArticleID '$GetParam{ArticleID}' of ticket with TicketID '$GetParam{TicketID}'!",
             );
         }
@@ -88,7 +99,7 @@ sub Run {
     for my $ArticleID ( sort @ArticleIDs ) {
 
         # article flag
-        my $Success = $Self->{TicketObject}->$ArticleActionFunction(
+        my $Success = $TicketObject->$ArticleActionFunction(
             ArticleID => $ArticleID,
             Key       => 'Seen',
             Value     => 1,               # irrelevant in case of delete
@@ -97,7 +108,7 @@ sub Run {
 
         next ARTICLE if $Success;
 
-        $Self->{LayoutObject}->FatalError(
+        $LayoutObject->FatalError(
             Message => "Error while setting article with ArticleID '$ArticleID' ".
                         "of ticket with TicketID '$GetParam{TicketID}' as ".
                         ( lc $GetParam{Subaction} ).
@@ -106,7 +117,7 @@ sub Run {
     }
 
     # ticket flag
-    my $Success = $Self->{TicketObject}->$TicketActionFunction(
+    my $Success = $TicketObject->$TicketActionFunction(
         TicketID => $GetParam{TicketID},
         Key      => 'Seen',
         Value    => 1,               # irrelevant in case of delete
@@ -114,7 +125,7 @@ sub Run {
     );
 
     if ( !$Success ) {
-        $Self->{LayoutObject}->FatalError(
+        $LayoutObject->FatalError(
             Message => "Error while setting ticket with ".
                         "TicketID '$GetParam{TicketID}' as ".
                         ( lc $GetParam{Subaction} ).
@@ -123,18 +134,18 @@ sub Run {
     }
 
     # get back to our last search result if the request came from a search view
-    if ( $Self->{ParamObject}->GetParam( Param => 'RedirectToSearch' ) ) {
-        return $Self->{LayoutObject}->Redirect(
+    if ( $ParamObject->GetParam( Param => 'RedirectToSearch' ) ) {
+        return $LayoutObject->Redirect(
             OP => 'Action=AgentTicketSearch;Subaction=Search;Profile=last-search;TakeLastSearch=1;',
         );
     }
 
-    my %UserPreferences = $Self->{UserObject}->GetPreferences(
+    my %UserPreferences = $UserObject->GetPreferences(
         UserID => $Self->{UserID},
     );
 
     my $RedirectURL = $UserPreferences{'UserMarkTicket'. $GetParam{Subaction} .'RedirectURL'};
-    $RedirectURL  ||= $Self->{ConfigObject}->Get('MarkTicket'. $GetParam{Subaction} .'RedirectDefaultURL');
+    $RedirectURL  ||= $ConfigObject->Get('MarkTicket'. $GetParam{Subaction} .'RedirectDefaultURL');
     $RedirectURL  ||= 'Action=AgentTicketZoom;TicketID=###TicketID###';
 
     REPLACE:
@@ -146,7 +157,7 @@ sub Run {
         $RedirectURL =~ s{###$ReplaceParam###}{$GetParam{$ReplaceParam}}g;
     }
 
-    return $Self->{LayoutObject}->Redirect(
+    return $LayoutObject->Redirect(
         OP => $RedirectURL,
     );
 }

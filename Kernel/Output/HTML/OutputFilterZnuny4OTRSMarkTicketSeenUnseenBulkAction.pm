@@ -2,11 +2,21 @@
 # Kernel/Output/HTML/OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulkAction.pm - handles the 'Mark tickets as unseen' selection made in the buk action view
 # Copyright (C) 2014 Znuny GmbH, http://znuny.com/
 # --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
 
 package Kernel::Output::HTML::OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulkAction;
 
 use strict;
 use warnings;
+
+our @ObjectDependencies = (
+    'Kernel::System::Ticket',
+    'Kernel::Output::HTML::Layout',
+    'Kernel::System::Web::Request',
+);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -15,16 +25,15 @@ sub new {
     my $Self = {};
     bless( $Self, $Type );
 
-    # check needed objects
-    for (qw(ConfigObject LogObject LayoutObject ParamObject TicketObject)) {
-        $Self->{$_} = $Param{$_} || die "Got no $_!";
-    }
-
     return $Self;
 }
 
 sub Run {
     my ( $Self, %Param ) = @_;
+
+    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $LayoutObject    =$Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my %RequiredGetParam = (
         Action    => 'AgentTicketBulk',
@@ -33,7 +42,7 @@ sub Run {
 
     my %GetParam;
     for my $Param ( qw(Action Subaction) ) {
-        $GetParam{ $Param } = $Self->{ParamObject}->GetParam( Param => $Param );
+        $GetParam{ $Param } = $ParamObject->GetParam( Param => $Param );
 
         return 1 if !$GetParam{ $Param };
         return 1 if $GetParam{ $Param } ne $RequiredGetParam{ $Param };
@@ -48,7 +57,7 @@ sub Run {
     PARAM:
     for my $CurrentParam ( qw(MarkTicketsAsUnseen MarkTicketsAsSeen) ) {
 
-        next PARAM if !$Self->{ParamObject}->GetParam( Param => $CurrentParam );
+        next PARAM if !$ParamObject->GetParam( Param => $CurrentParam );
 
         # determine required function for subaction
         my $TicketActionFunction  = 'TicketFlagDelete';
@@ -63,7 +72,7 @@ sub Run {
         if ( !@TicketIDs ) {
             @TicketIDs
                 = grep {$_}
-                $Self->{ParamObject}->GetArray( Param => 'TicketID' );
+                $ParamObject->GetArray( Param => 'TicketID' );
         }
 
         # end loop if no ticket should get edited (?!)
@@ -72,7 +81,7 @@ sub Run {
         TICKET:
         for my $TicketID ( sort @TicketIDs ) {
 
-            my @ArticleIDs = $Self->{TicketObject}->ArticleIndex(
+            my @ArticleIDs = $TicketObject->ArticleIndex(
                 TicketID => $TicketID,
             );
 
@@ -80,16 +89,16 @@ sub Run {
             for my $ArticleID ( sort @ArticleIDs ) {
 
                 # article flag
-                my $Success = $Self->{TicketObject}->$ArticleActionFunction(
+                my $Success = $TicketObject->$ArticleActionFunction(
                     ArticleID => $ArticleID,
                     Key       => 'Seen',
                     Value     => 1,                               # irrelevant in case of delete
-                    UserID    => $Self->{LayoutObject}->{UserID},
+                    UserID    => $LayoutObject->{UserID},
                 );
 
                 next ARTICLE if $Success;
 
-                $Self->{LayoutObject}->FatalError(
+                $LayoutObject->FatalError(
                     Message => "Error while setting article with ArticleID '$ArticleID' ".
                                 "of ticket with TicketID '$TicketID' as ".
                                 ( lc $ParamFlagMapping{ $CurrentParam } ) .
@@ -98,15 +107,15 @@ sub Run {
             }
 
             # ticket flag
-            my $Success = $Self->{TicketObject}->$TicketActionFunction(
+            my $Success = $TicketObject->$TicketActionFunction(
                 TicketID => $TicketID,
                 Key      => 'Seen',
                 Value    => 1,                               # irrelevant in case of delete
-                UserID   => $Self->{LayoutObject}->{UserID},
+                UserID   => $LayoutObject->{UserID},
             );
 
             if ( !$Success ) {
-                $Self->{LayoutObject}->FatalError(
+                $LayoutObject->FatalError(
                     Message => "Error while setting ticket with TicketID '$TicketID' as ".
                                 ( lc $ParamFlagMapping{ $CurrentParam } ) .
                                 "!",

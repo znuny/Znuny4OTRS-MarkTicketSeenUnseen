@@ -8,11 +8,7 @@ With this extension you will be able to mark whole tickets as seen or unseen and
 
 - [Znuny4OTRS-Repo](http://znuny.com/#!/znuny4otrs)
 
-- OTRS 3.1
-
-- OTRS 3.2
-
-- OTRS 3.3
+- OTRS 4.0
 
 **Installation**
 
