@@ -1,13 +1,12 @@
 # --
-# Kernel/Output/HTML/OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulk.pm - adds a the 'Mark tickets as seen' and 'Mark tickets as unseen' selections to the buk action view
-# Copyright (C) 2014 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2015 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::Output::HTML::OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulk;
+package Kernel::Output::HTML::OutputFilterPostZnuny4OTRSMarkTicketSeenUnseenBulk;
 
 use strict;
 use warnings;
@@ -31,14 +30,13 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-
     my %ParamLabel = (
         MarkTicketsAsSeen   => "Mark tickets as seen",
         MarkTicketsAsUnseen => "Mark tickets as unseen",
     );
 
     PARAM:
-    for my $CurrentParam ( qw( MarkTicketsAsSeen MarkTicketsAsUnseen ) ) {
+    for my $CurrentParam (qw( MarkTicketsAsSeen MarkTicketsAsUnseen )) {
 
         my $CurrentParamValue = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $CurrentParam );
 
@@ -48,8 +46,10 @@ sub Run {
             SelectedID => $CurrentParamValue || 0,
         );
 
+        my $CurrenParamTranslation = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{LanguageObject}
+            ->Translate( $ParamLabel{$CurrentParam} );
         my $ElementHTML = <<HTML;
-                        <label for="$CurrentParam">[% Translate("$ParamLabel{$CurrentParam}") | html %]:</label>
+                        <label for="$CurrentParam">$CurrenParamTranslation:</label>
                         <div class="Field">
                             $SelectHTML
                         </div>

@@ -18,7 +18,7 @@
         <SubGroup>Frontend::Agent::Preferences</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::PreferencesGeneric</Item>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
                 <Item Key="Column">Other Settings</Item>
                 <Item Key="Label" Translatable="1">Screen after marking ticket as unseen</Item>
                 <Item Key="Key" Translatable="1">Show this screen after I marked a ticket as unseen</Item>
@@ -63,7 +63,7 @@
         <SubGroup>Frontend::Agent::Preferences</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::PreferencesGeneric</Item>
+                <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
                 <Item Key="Column">Other Settings</Item>
                 <Item Key="Label" Translatable="1">Screen after marking ticket as seen</Item>
                 <Item Key="Key" Translatable="1">Show this screen after I marked a ticket as seen</Item>
@@ -108,7 +108,7 @@
         <SubGroup>Frontend::Agent::Ticket::MenuModule</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::TicketMenuGeneric</Item>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name">Mark unseen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as unseen</Item>
                 <Item Key="Action"></Item>
@@ -124,7 +124,7 @@
         <SubGroup>Frontend::Agent::Ticket::MenuModule</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::TicketMenuGeneric</Item>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name">Mark seen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as seen</Item>
                 <Item Key="Action"></Item>
@@ -140,7 +140,7 @@
         <SubGroup>Frontend::Agent::Ticket::MenuModulePre</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::TicketMenuGeneric</Item>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name">Mark unseen</Item>
                 <Item Key="Description" Translatable="1">mark ticket as unseen</Item>
                 <Item Key="Action"></Item>
@@ -156,7 +156,7 @@
         <SubGroup>Frontend::Agent::Ticket::MenuModulePre</SubGroup>
         <Setting>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::TicketMenuGeneric</Item>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name">Mark seen</Item>
                 <Item Key="Description" Translatable="1">mark ticket as seen</Item>
                 <Item Key="Action"></Item>
@@ -166,28 +166,28 @@
             </Hash>
         </Setting>
     </ConfigItem>
-    <ConfigItem Name="Frontend::Output::FilterElementPre###OutputFilterZnuny4OTRSMarkTicketSeenUnseen" Required="0" Valid="1">
+    <ConfigItem Name="Frontend::Output::FilterElementPost###OutputFilterPostZnuny4OTRSMarkTicketSeenUnseen" Required="0" Valid="1">
         <Description Translatable="1">This configuration registers an output filter that adds a 'Mark article as unseen' link to the article menu.</Description>
         <Group>Znuny4OTRS-MarkTicketSeenUnseen</Group>
         <SubGroup>Core::Web</SubGroup>
             <Setting>
                 <Hash>
-                    <Item Key="Module">Kernel::Output::HTML::OutputFilterZnuny4OTRSMarkTicketSeenUnseen</Item>
+                    <Item Key="Module">Kernel::Output::HTML::OutputFilterPostZnuny4OTRSMarkTicketSeenUnseen</Item>
                     <Item Key="Templates">
                     <Hash>
-                        <Item Key="ArticleActionMenu">1</Item>
+                        <Item Key="AgentTicketZoom">1</Item>
                     </Hash>
                     </Item>
                 </Hash>
             </Setting>
     </ConfigItem>
-    <ConfigItem Name="Frontend::Output::FilterElementPre###OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulk" Required="0" Valid="1">
+    <ConfigItem Name="Frontend::Output::FilterElementPost###OutputFilterPostZnuny4OTRSMarkTicketSeenUnseenBulk" Required="0" Valid="1">
         <Description Translatable="1">This configuration registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view.</Description>
         <Group>Znuny4OTRS-MarkTicketSeenUnseen</Group>
         <SubGroup>Core::Web</SubGroup>
             <Setting>
                 <Hash>
-                    <Item Key="Module">Kernel::Output::HTML::OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulk</Item>
+                    <Item Key="Module">Kernel::Output::HTML::OutputFilterPostZnuny4OTRSMarkTicketSeenUnseenBulk</Item>
                     <Item Key="Templates">
                     <Hash>
                         <Item Key="AgentTicketBulk">1</Item>
@@ -196,13 +196,13 @@
                 </Hash>
             </Setting>
     </ConfigItem>
-    <ConfigItem Name="Frontend::Output::FilterElementPre###OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulkAction" Required="0" Valid="1">
+    <ConfigItem Name="Frontend::Output::FilterElementPost###OutputFilterPostZnuny4OTRSMarkTicketSeenUnseenBulkAction" Required="0" Valid="1">
         <Description Translatable="1">This configuration registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view.</Description>
         <Group>Znuny4OTRS-MarkTicketSeenUnseen</Group>
         <SubGroup>Core::Web</SubGroup>
             <Setting>
                 <Hash>
-                    <Item Key="Module">Kernel::Output::HTML::OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulkAction</Item>
+                    <Item Key="Module">Kernel::Output::HTML::OutputFilterPostZnuny4OTRSMarkTicketSeenUnseenBulkAction</Item>
                     <Item Key="Templates">
                     <Hash>
                         <Item Key="AgentTicketActionPopupClose">1</Item>
