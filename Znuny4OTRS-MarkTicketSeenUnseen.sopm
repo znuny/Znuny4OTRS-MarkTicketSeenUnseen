@@ -13,9 +13,9 @@
         <File Permission="644" Location="Kernel/Config/Files/Znuny4OTRSMarkTicketSeenUnseen.xml"/>
         <File Permission="644" Location="Kernel/Language/de_Znuny4OTRSMarkTicketSeenUnseen.pm"/>
         <File Permission="644" Location="Kernel/Modules/AgentTicketMarkSeenUnseen.pm"/>
-        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterPostZnuny4OTRSMarkTicketSeenUnseen.pm"/>
-        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterPostZnuny4OTRSMarkTicketSeenUnseenBulk.pm"/>
-        <File Permission="644" Location="Kernel/Output/HTML/OutputFilterPostZnuny4OTRSMarkTicketSeenUnseenBulkAction.pm"/>
+        <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseen.pm"/>
+        <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulk.pm"/>
+        <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulkAction.pm"/>
         <File Permission="644" Location="var/httpd/htdocs/js/Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js"/>
     </Filelist>
     <CodeInstall Type="post" ><![CDATA[

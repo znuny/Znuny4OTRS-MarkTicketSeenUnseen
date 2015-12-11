@@ -6,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package Kernel::Output::HTML::OutputFilterPostZnuny4OTRSMarkTicketSeenUnseenBulkAction;
+package Kernel::Output::HTML::FilterElementPost::Znuny4OTRSMarkTicketSeenUnseenBulkAction;
 
 use strict;
 use warnings;
