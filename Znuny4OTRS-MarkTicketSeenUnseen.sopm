@@ -23,18 +23,27 @@
 
         my %LoaderData = (
             AgentTicketZoom => [
-                                    'Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js',
-                                ],
+                'Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js',
+            ],
         );
         $Kernel::OM->Get('Kernel::System::ZnunyHelper')->_LoaderAdd( %LoaderData );
 
     ]]></CodeInstall>
+    <CodeUpgrade Type="post"><![CDATA[
+
+        my %LoaderData = (
+            AgentTicketZoom => [
+                'Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js',
+            ],
+        );
+        $Kernel::OM->Get('Kernel::System::ZnunyHelper')->_LoaderAdd( %LoaderData );
+    ]]></CodeUpgrade>
     <CodeUninstall Type="post"><![CDATA[
 
         my %LoaderData = (
             AgentTicketZoom => [
-                                    'Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js',
-                                ],
+                'Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js',
+            ],
         );
         $Kernel::OM->Get('Kernel::System::ZnunyHelper')->_LoaderRemove( %LoaderData );
 
