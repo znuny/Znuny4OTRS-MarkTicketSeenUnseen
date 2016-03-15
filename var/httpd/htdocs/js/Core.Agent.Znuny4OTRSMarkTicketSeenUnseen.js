@@ -50,7 +50,7 @@ Core.Agent.Znuny4OTRSMarkTicketSeenUnseen = (function (TargetNS) {
         var Baselink = Core.Config.Get('Baselink');
 
         var HTML = "<li>";
-        HTML += "<a href='" + Baselink + "Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=" + Param['TicketID'] + ";ArticleID=" + ArticleID + "' title=' " + Param['TranslateTitle'] + "'>" + Param['TranslateLink'] + "</a>";
+        HTML += "<a id='AgentTicketMarkSeenUnseenArticle' href='" + Baselink + "Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=" + Param['TicketID'] + ";ArticleID=" + ArticleID + "' title=' " + Param['TranslateTitle'] + "'>" + Param['TranslateLink'] + "</a>";
         HTML += "</li>";
 
         $('#ArticleItems div div ul.Actions').append(HTML);
