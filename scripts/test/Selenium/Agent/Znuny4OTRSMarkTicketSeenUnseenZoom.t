@@ -102,12 +102,12 @@ $Selenium->RunTest(
 
         # check for elements
         $Self->True(
-            $Selenium->find_element('//*[@id="nav-Mark seen"]/a')->is_displayed(),
+            $Selenium->find_element('li#nav-Mark-seen a', 'css')->is_displayed(),
             "Mark Ticket as seen link is visible",
         );
 
         $Self->True(
-            $Selenium->find_element('//*[@id="nav-Mark unseen"]/a')->is_displayed(),
+            $Selenium->find_element('li#nav-Mark-unseen a', 'css')->is_displayed(),
             "Mark Ticket as unseen link is visible",
         );
 
@@ -116,9 +116,7 @@ $Selenium->RunTest(
             "Mark Article as unseen link is visible",
         );
 
-
-        # workaround since OTRS uses the name as the ID which can contain spaces -.-
-        $Selenium->find_element('//*[@id="nav-Mark unseen"]/a')->click();
+        $Selenium->find_element('li#nav-Mark-unseen a', 'css')->click();
 
         my %Flags = $TicketObject->ArticleFlagGet(
             ArticleID => $ArticleIDFirst,
