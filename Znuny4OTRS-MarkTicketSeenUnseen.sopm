@@ -18,6 +18,7 @@
         <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseen.pm"/>
         <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulk.pm"/>
         <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulkAction.pm"/>
+        <File Permission="644" Location="scripts/test/Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseenZoom.t"/>
         <File Permission="644" Location="var/httpd/htdocs/js/Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js"/>
     </Filelist>
     <CodeInstall Type="post"><![CDATA[
