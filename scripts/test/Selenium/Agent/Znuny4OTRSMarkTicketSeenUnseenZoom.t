@@ -12,186 +12,136 @@ use utf8;
 
 use vars (qw($Self));
 
-# get selenium object
-my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+# get the Znuny4OTRS Selenium object
+my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Znuny4OTRSSelenium');
 
-$Selenium->RunTest(
-    sub {
-        my $Helper     = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+# store test function in variable so the Selenium object can handle errors/exceptions/dies etc.
+my $SeleniumTest = sub {
 
-        # create test user and login
-        my $TestUserLogin = $Helper->TestUserCreate(
-            Groups => [ 'admin', 'users' ],
-        ) || die "Did not get test user";
+    # initialize Znuny4OTRS Helpers and other needed objects
+    my $UnitTestHelper = $Kernel::OM->Get('Kernel::System::UnitTest::Znuny4OTRSHelper');
+    my $ZnunyHelper    = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
+    my $TicketObject   = $Kernel::OM->Get('Kernel::System::Ticket');
 
-        my %TestUserList = $UserObject->UserSearch(
-            UserLogin => $TestUserLogin,
-        );
-        %TestUserList = reverse %TestUserList;
+    # create test user and login
+    my %TestUser = $Selenium->AgentLogin(
+        Groups => [ 'admin', 'users' ],
+    );
 
-        my %TestUser = $UserObject->GetUserData(
-            UserID => $TestUserList{$TestUserLogin},
-        );
+    # create test Ticket and Articles
+    my $TicketID       = $UnitTestHelper->TicketCreate();
+    my $ArticleIDFirst = $UnitTestHelper->ArticleCreate(
+        TicketID => $TicketID,
+    );
+    my $ArticleIDSecond = $UnitTestHelper->ArticleCreate(
+        TicketID => $TicketID,
+    );
 
-        $Selenium->Login(
-            Type     => 'Agent',
-            User     => $TestUserLogin,
-            Password => $TestUserLogin,
-        );
+    # navigate to created test ticket in AgentTicketZoom page
+    $Selenium->AgentInterface(
+        Action   => 'AgentTicketZoom',
+        TicketID => $TicketID
+    );
 
-        # get ticket object
-        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    # check for elements
+    $Self->True(
+        $Selenium->find_element('li#nav-Mark-seen a', 'css')->is_displayed(),
+        "Mark Ticket as seen link is visible",
+    );
 
-        # create test ticket
-        my $TicketID = $TicketObject->TicketCreate(
-            Title        => 'Selenium ticket',
-            Queue        => 'Raw',
-            Lock         => 'unlock',
-            Priority     => '3 normal',
-            State        => 'new',
-            CustomerID   => 'SeleniumCustomer',
-            CustomerUser => 'customer@example.com',
-            OwnerID      => 1,
-            UserID       => 1,
-        );
-        $Self->True(
-            $TicketID,
-            "Ticket is created - ID $TicketID",
-        );
+    $Self->True(
+        $Selenium->find_element('li#nav-Mark-unseen a', 'css')->is_displayed(),
+        "Mark Ticket as unseen link is visible",
+    );
 
-        my $ArticleIDFirst = $TicketObject->ArticleCreate(
-            TicketID       => $TicketID,
-            ArticleType    => 'note-internal',
-            SenderType     => 'agent',
-            Subject        => 'Selenium subject test',
-            Body           => 'Selenium body test',
-            ContentType    => 'text/plain; charset=ISO-8859-15',
-            HistoryType    => 'OwnerUpdate',
-            HistoryComment => 'Some free text!',
-            UserID         => 1,
-            NoAgentNotify  => 1,
-        );
-        $Self->True(
-            $ArticleIDFirst,
-            "ArticleCreate - ID $ArticleIDFirst",
-        );
+    $Self->True(
+        $Selenium->find_element('#AgentTicketMarkSeenUnseenArticle', 'css')->is_displayed(),
+        "Mark Article as unseen link is visible",
+    );
 
-        my $ArticleIDSecond = $TicketObject->ArticleCreate(
-            TicketID       => $TicketID,
-            ArticleType    => 'note-internal',
-            SenderType     => 'agent',
-            Subject        => 'Selenium subject test',
-            Body           => 'Selenium body test',
-            ContentType    => 'text/plain; charset=ISO-8859-15',
-            HistoryType    => 'OwnerUpdate',
-            HistoryComment => 'Some free text!',
-            UserID         => 1,
-            NoAgentNotify  => 1,
-        );
-        $Self->True(
-            $ArticleIDSecond,
-            "ArticleCreate - ID $ArticleIDSecond",
-        );
+    # mark Ticket as unseen
+    $Selenium->find_element('li#nav-Mark-unseen a', 'css')->click();
 
-        # get script alias
-        my $ScriptAlias = $Kernel::OM->Get('Kernel::Config')->Get('ScriptAlias');
+    # check if flags were set correctly
+    my %Flags = $TicketObject->ArticleFlagGet(
+        ArticleID => $ArticleIDFirst,
+        UserID    => $TestUser{UserID},
+    );
 
-        # navigate to created test ticket in AgentTicketZoom page
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
+    $Self->False(
+        $Flags{Seen},
+        "Initial Article Seen Flag - ID $ArticleIDFirst",
+    );
 
-        # check for elements
-        $Self->True(
-            $Selenium->find_element('li#nav-Mark-seen a', 'css')->is_displayed(),
-            "Mark Ticket as seen link is visible",
-        );
+    %Flags = $TicketObject->ArticleFlagGet(
+        ArticleID => $ArticleIDSecond,
+        UserID    => $TestUser{UserID},
+    );
 
-        $Self->True(
-            $Selenium->find_element('li#nav-Mark-unseen a', 'css')->is_displayed(),
-            "Mark Ticket as unseen link is visible",
-        );
+    $Self->False(
+        $Flags{Seen},
+        "Initial Article Seen Flag - ID $ArticleIDSecond",
+    );
 
-        $Self->True(
-            $Selenium->find_element('#AgentTicketMarkSeenUnseenArticle', 'css')->is_displayed(),
-            "Mark Article as unseen link is visible",
-        );
+    # call Seen Subaction directly
+    $Selenium->AgentInterface(
+        Action      => 'AgentTicketMarkSeenUnseen',
+        Subaction   => 'Seen',
+        TicketID    => $TicketID,
+        ArticleID   => $ArticleIDFirst,
+        WaitForAJAX => 0,
+    );
 
-        $Selenium->find_element('li#nav-Mark-unseen a', 'css')->click();
+    # check if URL call has marked the Article as seen
+    %Flags = $TicketObject->ArticleFlagGet(
+        ArticleID => $ArticleIDFirst,
+        UserID    => $TestUser{UserID},
+    );
 
-        my %Flags = $TicketObject->ArticleFlagGet(
-            ArticleID => $ArticleIDFirst,
-            UserID    => $TestUser{UserID},
-        );
+    $Self->True(
+        $Flags{Seen},
+        "Subaction Article Seen Flag - ID $ArticleIDFirst",
+    );
 
-        $Self->False(
-            $Flags{Seen},
-            "Article Seen Flag - ID $ArticleIDFirst",
-        );
+    %Flags = $TicketObject->ArticleFlagGet(
+        ArticleID => $ArticleIDSecond,
+        UserID    => $TestUser{UserID},
+    );
 
-        %Flags = $TicketObject->ArticleFlagGet(
-            ArticleID => $ArticleIDSecond,
-            UserID    => $TestUser{UserID},
-        );
+    $Self->False(
+        $Flags{Seen},
+        "Subaction Article Seen Flag - ID $ArticleIDSecond",
+    );
 
-        $Self->False(
-            $Flags{Seen},
-            "Article Seen Flag - ID $ArticleIDSecond",
-        );
+    # re navigate to created test ticket in AgentTicketZoom page
+    $Selenium->AgentInterface(
+        Action   => 'AgentTicketZoom',
+        TicketID => $TicketID
+    );
 
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=$TicketID;ArticleID=$ArticleIDFirst");
+    # check if AJAX Requets have marked the remaining Article as read
+    %Flags = $TicketObject->ArticleFlagGet(
+        ArticleID => $ArticleIDFirst,
+        UserID    => $TestUser{UserID},
+    );
 
-        # wait until page has finished loading
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function"' );
+    $Self->True(
+        $Flags{Seen},
+        "Zoom AJAX Article Seen Flag - ID $ArticleIDFirst",
+    );
 
-        %Flags = $TicketObject->ArticleFlagGet(
-            ArticleID => $ArticleIDFirst,
-            UserID    => $TestUser{UserID},
-        );
+    %Flags = $TicketObject->ArticleFlagGet(
+        ArticleID => $ArticleIDSecond,
+        UserID    => $TestUser{UserID},
+    );
 
-        $Self->True(
-            $Flags{Seen},
-            "Article Seen Flag - ID $ArticleIDFirst",
-        );
+    $Self->True(
+        $Flags{Seen},
+        "Zoom AJAX Article Seen Flag - ID $ArticleIDSecond",
+    );
+};
 
-        %Flags = $TicketObject->ArticleFlagGet(
-            ArticleID => $ArticleIDSecond,
-            UserID    => $TestUser{UserID},
-        );
-
-        $Self->False(
-            $Flags{Seen},
-            "Article Seen Flag - ID $ArticleIDSecond",
-        );
-
-        # re navigate to created test ticket in AgentTicketZoom page
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
-
-        # wait until page has finished loading
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function"' );
-
-        # wait for the AJAX request to complete
-        sleep 5;
-
-        %Flags = $TicketObject->ArticleFlagGet(
-            ArticleID => $ArticleIDFirst,
-            UserID    => $TestUser{UserID},
-        );
-
-        $Self->True(
-            $Flags{Seen},
-            "Article Seen Flag - ID $ArticleIDFirst",
-        );
-
-        %Flags = $TicketObject->ArticleFlagGet(
-            ArticleID => $ArticleIDSecond,
-            UserID    => $TestUser{UserID},
-        );
-
-        $Self->True(
-            $Flags{Seen},
-            "Article Seen Flag - ID $ArticleIDSecond",
-        );
-    }
-);
+# finally run the test(s) in the browser
+$Selenium->RunTest( $SeleniumTest );
 
 1;
