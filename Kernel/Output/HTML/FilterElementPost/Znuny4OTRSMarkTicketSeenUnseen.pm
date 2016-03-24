@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2012-2015 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2016 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -46,48 +46,9 @@ sub Run {
     Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.Init({TicketID:'$TicketID', TranslateTitle:'$TranslateTitle', TranslateLink:'$TranslateLink', });
 JS_BLOCK
 
-    $Self->AddJSOnDocumentCompleteIfNotExists(
+    $LayoutObject->AddJSOnDocumentCompleteIfNotExists(
         Key  => 'Znuny4OTRSMarkTicketSeenUnseen',
         Code => $JSBlock,
-    );
-
-    return 1;
-}
-
-sub AddJSOnDocumentCompleteIfNotExists {
-    my ( $Self, %Param ) = @_;
-
-    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-
-    # check needed stuff
-    NEEDED:
-    for my $Needed (qw(Key Code)) {
-
-        next NEEDED if defined $Param{$Needed};
-
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => "Parameter '$Needed' is needed!",
-        );
-        return;
-    }
-
-    my $Exists = 0;
-    CODEJS:
-    for my $CodeJS ( @{ $LayoutObject->{_JSOnDocumentComplete} || [] } ) {
-
-        next CODEJS if $CodeJS !~ m{ Key: \s $Param{Key}}xms;
-        $Exists = 1;
-        last CODEJS;
-    }
-
-    return 1 if $Exists;
-
-    my $AddCode = "// Key: $Param{Key}\n" . $Param{Code};
-
-    $LayoutObject->AddJSOnDocumentComplete(
-        Code => $AddCode,
     );
 
     return 1;

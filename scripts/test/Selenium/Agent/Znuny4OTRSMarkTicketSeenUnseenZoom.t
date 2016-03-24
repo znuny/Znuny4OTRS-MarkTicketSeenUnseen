@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2014 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2016 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -13,54 +13,62 @@ use utf8;
 use vars (qw($Self));
 
 # get the Znuny4OTRS Selenium object
-my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Znuny4OTRSSelenium');
+my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 # store test function in variable so the Selenium object can handle errors/exceptions/dies etc.
 my $SeleniumTest = sub {
 
     # initialize Znuny4OTRS Helpers and other needed objects
-    my $UnitTestHelper = $Kernel::OM->Get('Kernel::System::UnitTest::Znuny4OTRSHelper');
-    my $ZnunyHelper    = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
-    my $TicketObject   = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+    my $ZnunyHelper  = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
     # create test user and login
-    my %TestUser = $Selenium->AgentLogin(
+    my %TestUser = $SeleniumObject->AgentLogin(
         Groups => [ 'admin', 'users' ],
     );
 
     # create test Ticket and Articles
-    my $TicketID       = $UnitTestHelper->TicketCreate();
-    my $ArticleIDFirst = $UnitTestHelper->ArticleCreate(
+    my $TicketID = $HelperObject->TicketCreate();
+
+    # navigate to created test ticket in AgentTicketZoom page without an article
+    $SeleniumObject->AgentInterface(
+        Action      => 'AgentTicketZoom',
+        TicketID    => $TicketID,
+        WaitForAJAX => 0,
+    );
+
+    my $ArticleIDFirst = $HelperObject->ArticleCreate(
         TicketID => $TicketID,
     );
-    my $ArticleIDSecond = $UnitTestHelper->ArticleCreate(
+    my $ArticleIDSecond = $HelperObject->ArticleCreate(
         TicketID => $TicketID,
     );
 
-    # navigate to created test ticket in AgentTicketZoom page
-    $Selenium->AgentInterface(
+    # navigate to created test ticket in AgentTicketZoom page with an article
+    $SeleniumObject->AgentInterface(
         Action   => 'AgentTicketZoom',
         TicketID => $TicketID
     );
 
     # check for elements
     $Self->True(
-        $Selenium->find_element('li#nav-Mark-seen a', 'css')->is_displayed(),
+        $SeleniumObject->find_element( 'li#nav-Mark-seen a', 'css' )->is_displayed(),
         "Mark Ticket as seen link is visible",
     );
 
     $Self->True(
-        $Selenium->find_element('li#nav-Mark-unseen a', 'css')->is_displayed(),
+        $SeleniumObject->find_element( 'li#nav-Mark-unseen a', 'css' )->is_displayed(),
         "Mark Ticket as unseen link is visible",
     );
 
     $Self->True(
-        $Selenium->find_element('#AgentTicketMarkSeenUnseenArticle', 'css')->is_displayed(),
+        $SeleniumObject->find_element( '#AgentTicketMarkSeenUnseenArticle', 'css' )->is_displayed(),
         "Mark Article as unseen link is visible",
     );
 
     # mark Ticket as unseen
-    $Selenium->find_element('li#nav-Mark-unseen a', 'css')->click();
+    $SeleniumObject->find_element( 'li#nav-Mark-unseen a', 'css' )->click();
 
     # check if flags were set correctly
     my %Flags = $TicketObject->ArticleFlagGet(
@@ -84,7 +92,7 @@ my $SeleniumTest = sub {
     );
 
     # call Seen Subaction directly
-    $Selenium->AgentInterface(
+    $SeleniumObject->AgentInterface(
         Action      => 'AgentTicketMarkSeenUnseen',
         Subaction   => 'Seen',
         TicketID    => $TicketID,
@@ -114,7 +122,7 @@ my $SeleniumTest = sub {
     );
 
     # re navigate to created test ticket in AgentTicketZoom page
-    $Selenium->AgentInterface(
+    $SeleniumObject->AgentInterface(
         Action   => 'AgentTicketZoom',
         TicketID => $TicketID
     );
@@ -142,6 +150,6 @@ my $SeleniumTest = sub {
 };
 
 # finally run the test(s) in the browser
-$Selenium->RunTest( $SeleniumTest );
+$SeleniumObject->RunTest($SeleniumTest);
 
 1;
