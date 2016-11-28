@@ -47,8 +47,8 @@ Core.Agent.Znuny4OTRSMarkTicketSeenUnseen = (function (TargetNS) {
 
     TargetNS.AgentTicketMarkSeenUnseen = function (Param) {
 
-        // check if at least one article is exists
-        if ($('#ArticleItems div a').length == 0){
+        // check if at least one article exists
+        if ($('#ArticleItems div ul li a').length == 0){
             return;
         }
 
