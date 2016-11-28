@@ -1,7 +1,13 @@
 image: otrs5ci
 
 stages:
+  - test
   - deploy
+
+job_unit_otrs_Znuny4OTRSMarkTicketSeenUnseen:
+  stage: test
+  script:
+    - su -c "perl /opt/otrs/bin/otrs.Console.pl Dev::UnitTest::Run --test Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseenZoom" -s /bin/bash otrs
 
 job_deploy_otrs_Znuny4OTRSMarkTicketSeenUnseen:
   stage: deploy
