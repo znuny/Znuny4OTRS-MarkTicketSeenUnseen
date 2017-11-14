@@ -35,6 +35,10 @@ sub Run {
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
     my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    # Only handle popup close
+    # Check it by searching JSData added by Layout::Popup::PopupClose().
+    return 1 if index( ${ $Param{Data} }, '"PopupClose":"LoadParentURLAndClose"' ) == -1;
+
     my %RequiredGetParams = (
         Action    => 'AgentTicketBulk',
         Subaction => 'Do',

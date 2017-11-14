@@ -52,6 +52,11 @@ Core.Agent.Znuny4OTRSMarkTicketSeenUnseen = (function (TargetNS) {
             return;
         }
 
+        // check if link has already been added, don't add it more than once
+        if ($('li > a#AgentTicketMarkSeenUnseenArticle').length) {
+            return;
+        }
+
         ArticleID = $('#ArticleItems div a').attr('name').replace('Article', '');
         Baselink  = Core.Config.Get('Baselink');
 
