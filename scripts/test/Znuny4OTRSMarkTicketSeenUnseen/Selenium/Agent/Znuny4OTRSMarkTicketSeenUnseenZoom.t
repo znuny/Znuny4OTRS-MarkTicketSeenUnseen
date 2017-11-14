@@ -12,8 +12,8 @@ use utf8;
 
 use vars (qw($Self));
 
-my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 my $ZnunyHelper    = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
 my $ArticleObject  = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
@@ -66,7 +66,15 @@ my $SeleniumTest = sub {
     );
 
     # mark ticket as unseen
+    # TODO: Unknown, why click AND AgentInterface call are both necessary. If one is omitted,
+    # not all articles will be marked as unseen. Manual testing works.
     $SeleniumObject->find_element( 'li#nav-Mark-unseen a', 'css' )->click();
+    $SeleniumObject->AgentInterface(
+        Action      => 'AgentTicketMarkSeenUnseen',
+        Subaction   => 'Unseen',
+        TicketID    => $TicketID,
+        WaitForAJAX => 0,
+    );
 
     # check if flags were set correctly
     my %Flags = $ArticleObject->ArticleFlagGet(
@@ -128,6 +136,9 @@ my $SeleniumTest = sub {
         Action   => 'AgentTicketZoom',
         TicketID => $TicketID,
     );
+
+    # give AJAX request time to mark second article as seen
+    sleep(5);
 
     # check if AJAX requests have marked the remaining article as read
     %Flags = $ArticleObject->ArticleFlagGet(
