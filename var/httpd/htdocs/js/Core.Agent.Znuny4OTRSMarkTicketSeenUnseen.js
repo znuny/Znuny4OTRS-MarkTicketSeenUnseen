@@ -1,5 +1,5 @@
 // --
-// Copyright (C) 2012-2016 Znuny GmbH, http://znuny.com/
+// Copyright (C) 2012-2017 Znuny GmbH, http://znuny.com/
 // --
 // This software comes with ABSOLUTELY NO WARRANTY. For details, see
 // the enclosed file COPYING for license information (AGPL). If you
@@ -9,9 +9,7 @@
 "use strict";
 
 var Core   = Core || {};
-
 Core.Agent = Core.Agent || {};
-
 
 /**
  * @namespace
@@ -21,11 +19,10 @@ Core.Agent = Core.Agent || {};
  */
 Core.Agent.Znuny4OTRSMarkTicketSeenUnseen = (function (TargetNS) {
 
-
     TargetNS.Init = function (Param) {
         var ParamCheckSuccess = true;
-        $.each(
 
+        $.each(
             function (Index, ParameterName) {
                 if (!Param[ ParameterName ]) {
                     ParamCheckSuccess = false;
@@ -46,16 +43,19 @@ Core.Agent.Znuny4OTRSMarkTicketSeenUnseen = (function (TargetNS) {
     };
 
     TargetNS.AgentTicketMarkSeenUnseen = function (Param) {
+        var ArticleID,
+            Baselink = Core.Config.Get('Baselink'),
+            HTML;
 
         // check if at least one article exists
         if ($('#ArticleItems div ul li a').length == 0){
             return;
         }
 
-        var ArticleID = $('#ArticleItems div a').attr('name').replace('Article','');
-        var Baselink = Core.Config.Get('Baselink');
+        ArticleID = $('#ArticleItems div a').attr('name').replace('Article', '');
+        Baselink  = Core.Config.Get('Baselink');
 
-        var HTML = "<li>";
+        HTML = "<li>";
         HTML += "<a id='AgentTicketMarkSeenUnseenArticle' href='" + Baselink + "Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=" + Param['TicketID'] + ";ArticleID=" + ArticleID + "' title=' " + Param['TranslateTitle'] + "'>" + Param['TranslateLink'] + "</a>";
         HTML += "</li>";
 

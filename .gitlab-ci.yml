@@ -1,4 +1,11 @@
-image: otrs5ci
+image: registry.znuny.com/znuny/docker-otrs6ci:latest
+
+services:
+  - mysql:latest
+
+variables:
+  MYSQL_DATABASE: otrs
+  MYSQL_ROOT_PASSWORD: znuny4otrs
 
 stages:
   - test
@@ -11,7 +18,7 @@ job_unit_otrs_Znuny4OTRSMarkTicketSeenUnseen:
     - pwd
     - /run.sh
     - su -c "perl /opt/otrs/bin/otrs.Console.pl Znuny4OTRS::AdvancedPackageManager::InstallSOPM /opt/otrs/Znuny4OTRS-MarkTicketSeenUnseen.sopm" -s /bin/bash otrs
-    - su -c "perl /opt/otrs/bin/otrs.Console.pl Dev::UnitTest::Run --test Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseen" -s /bin/bash otrs
+    - su -c "perl /opt/otrs/bin/otrs.Console.pl Dev::UnitTest::Run --test Znuny4OTRSMarkTicketSeenUnseen/Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseenZoom" -s /bin/bash otrs
 
 job_deploy_otrs_Znuny4OTRSMarkTicketSeenUnseen:
   stage: deploy
