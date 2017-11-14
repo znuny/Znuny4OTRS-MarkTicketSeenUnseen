@@ -13,35 +13,35 @@ use utf8;
 use vars (qw($Self));
 
 my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
+my $HelperObject   = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $ZnunyHelper    = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
+my $ArticleObject  = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+# create test ticket and articles
+my $TicketID = $HelperObject->TicketCreate();
+
+my $ArticleIDFirst = $HelperObject->ArticleCreate(
+    TicketID => $TicketID,
+);
+my $ArticleIDSecond = $HelperObject->ArticleCreate(
+    TicketID => $TicketID,
+);
 
 # store test function in variable so the Selenium object can handle errors/exceptions/dies etc.
 my $SeleniumTest = sub {
-
-    my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-    my $ZnunyHelper   = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
-    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
     # create test user and login
     my %TestUser = $SeleniumObject->AgentLogin(
         Groups => [ 'admin', 'users' ],
     );
 
-    # create test Ticket and Articles
-    my $TicketID = $HelperObject->TicketCreate();
-
-    # navigate to created test ticket in AgentTicketZoom page without an article
-    $SeleniumObject->AgentInterface(
-        Action      => 'AgentTicketZoom',
-        TicketID    => $TicketID,
-        WaitForAJAX => 0,
-    );
-
-    my $ArticleIDFirst = $HelperObject->ArticleCreate(
-        TicketID => $TicketID,
-    );
-    my $ArticleIDSecond = $HelperObject->ArticleCreate(
-        TicketID => $TicketID,
-    );
+    # TODO: Use case for this test unknown
+    #     # navigate to created test ticket in AgentTicketZoom page without an article
+    #     $SeleniumObject->AgentInterface(
+    #         Action      => 'AgentTicketZoom',
+    #         TicketID    => $TicketID,
+    #         WaitForAJAX => 0,
+    #     );
 
     # navigate to created test ticket in AgentTicketZoom page with an article
     $SeleniumObject->AgentInterface(
@@ -70,6 +70,7 @@ my $SeleniumTest = sub {
 
     # check if flags were set correctly
     my %Flags = $ArticleObject->ArticleFlagGet(
+        TicketID  => $TicketID,
         ArticleID => $ArticleIDFirst,
         UserID    => $TestUser{UserID},
     );
@@ -80,6 +81,7 @@ my $SeleniumTest = sub {
     );
 
     %Flags = $ArticleObject->ArticleFlagGet(
+        TicketID  => $TicketID,
         ArticleID => $ArticleIDSecond,
         UserID    => $TestUser{UserID},
     );
@@ -100,6 +102,7 @@ my $SeleniumTest = sub {
 
     # check if URL call has marked the article as seen
     %Flags = $ArticleObject->ArticleFlagGet(
+        TicketID  => $TicketID,
         ArticleID => $ArticleIDFirst,
         UserID    => $TestUser{UserID},
     );
@@ -110,6 +113,7 @@ my $SeleniumTest = sub {
     );
 
     %Flags = $ArticleObject->ArticleFlagGet(
+        TicketID  => $TicketID,
         ArticleID => $ArticleIDSecond,
         UserID    => $TestUser{UserID},
     );
@@ -119,14 +123,15 @@ my $SeleniumTest = sub {
         "Subaction article seen flag - ID $ArticleIDSecond",
     );
 
-    # re navigate to created test ticket in AgentTicketZoom page
+    # re-navigate to created test ticket in AgentTicketZoom page
     $SeleniumObject->AgentInterface(
         Action   => 'AgentTicketZoom',
-        TicketID => $TicketID
+        TicketID => $TicketID,
     );
 
     # check if AJAX requests have marked the remaining article as read
     %Flags = $ArticleObject->ArticleFlagGet(
+        TicketID  => $TicketID,
         ArticleID => $ArticleIDFirst,
         UserID    => $TestUser{UserID},
     );
@@ -137,6 +142,7 @@ my $SeleniumTest = sub {
     );
 
     %Flags = $ArticleObject->ArticleFlagGet(
+        TicketID  => $TicketID,
         ArticleID => $ArticleIDSecond,
         UserID    => $TestUser{UserID},
     );

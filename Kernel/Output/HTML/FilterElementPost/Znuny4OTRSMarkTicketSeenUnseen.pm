@@ -14,7 +14,6 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::Language',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::Log',
     'Kernel::System::Web::Request',
 );
 
@@ -32,7 +31,6 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
     my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ParamObject    = $Kernel::OM->Get('Kernel::System::Web::Request');
