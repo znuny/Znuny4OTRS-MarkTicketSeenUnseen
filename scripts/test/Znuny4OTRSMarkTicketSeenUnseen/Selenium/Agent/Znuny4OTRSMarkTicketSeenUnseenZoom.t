@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2012-2016 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2017 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -12,16 +12,14 @@ use utf8;
 
 use vars (qw($Self));
 
-# get the Znuny4OTRS Selenium object
 my $SeleniumObject = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 # store test function in variable so the Selenium object can handle errors/exceptions/dies etc.
 my $SeleniumTest = sub {
 
-    # initialize Znuny4OTRS Helpers and other needed objects
-    my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-    my $ZnunyHelper  = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+    my $ZnunyHelper   = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
     # create test user and login
     my %TestUser = $SeleniumObject->AgentLogin(
@@ -54,44 +52,44 @@ my $SeleniumTest = sub {
     # check for elements
     $Self->True(
         $SeleniumObject->find_element( 'li#nav-Mark-seen a', 'css' )->is_displayed(),
-        "Mark Ticket as seen link is visible",
+        '"Mark ticket as seen" link is visible',
     );
 
     $Self->True(
         $SeleniumObject->find_element( 'li#nav-Mark-unseen a', 'css' )->is_displayed(),
-        "Mark Ticket as unseen link is visible",
+        '"Mark ticket as unseen" link is visible',
     );
 
     $Self->True(
         $SeleniumObject->find_element( '#AgentTicketMarkSeenUnseenArticle', 'css' )->is_displayed(),
-        "Mark Article as unseen link is visible",
+        '"Mark article as unseen" link is visible',
     );
 
-    # mark Ticket as unseen
+    # mark ticket as unseen
     $SeleniumObject->find_element( 'li#nav-Mark-unseen a', 'css' )->click();
 
     # check if flags were set correctly
-    my %Flags = $TicketObject->ArticleFlagGet(
+    my %Flags = $ArticleObject->ArticleFlagGet(
         ArticleID => $ArticleIDFirst,
         UserID    => $TestUser{UserID},
     );
 
     $Self->False(
         $Flags{Seen},
-        "Initial Article Seen Flag - ID $ArticleIDFirst",
+        "Initial article seen flag - ID $ArticleIDFirst",
     );
 
-    %Flags = $TicketObject->ArticleFlagGet(
+    %Flags = $ArticleObject->ArticleFlagGet(
         ArticleID => $ArticleIDSecond,
         UserID    => $TestUser{UserID},
     );
 
     $Self->False(
         $Flags{Seen},
-        "Initial Article Seen Flag - ID $ArticleIDSecond",
+        "Initial article seen flag - ID $ArticleIDSecond",
     );
 
-    # call Seen Subaction directly
+    # call "seen" subaction directly
     $SeleniumObject->AgentInterface(
         Action      => 'AgentTicketMarkSeenUnseen',
         Subaction   => 'Seen',
@@ -100,25 +98,25 @@ my $SeleniumTest = sub {
         WaitForAJAX => 0,
     );
 
-    # check if URL call has marked the Article as seen
-    %Flags = $TicketObject->ArticleFlagGet(
+    # check if URL call has marked the article as seen
+    %Flags = $ArticleObject->ArticleFlagGet(
         ArticleID => $ArticleIDFirst,
         UserID    => $TestUser{UserID},
     );
 
     $Self->True(
         $Flags{Seen},
-        "Subaction Article Seen Flag - ID $ArticleIDFirst",
+        "Subaction article seen flag - ID $ArticleIDFirst",
     );
 
-    %Flags = $TicketObject->ArticleFlagGet(
+    %Flags = $ArticleObject->ArticleFlagGet(
         ArticleID => $ArticleIDSecond,
         UserID    => $TestUser{UserID},
     );
 
     $Self->False(
         $Flags{Seen},
-        "Subaction Article Seen Flag - ID $ArticleIDSecond",
+        "Subaction article seen flag - ID $ArticleIDSecond",
     );
 
     # re navigate to created test ticket in AgentTicketZoom page
@@ -127,25 +125,25 @@ my $SeleniumTest = sub {
         TicketID => $TicketID
     );
 
-    # check if AJAX Requets have marked the remaining Article as read
-    %Flags = $TicketObject->ArticleFlagGet(
+    # check if AJAX requests have marked the remaining article as read
+    %Flags = $ArticleObject->ArticleFlagGet(
         ArticleID => $ArticleIDFirst,
         UserID    => $TestUser{UserID},
     );
 
     $Self->True(
         $Flags{Seen},
-        "Zoom AJAX Article Seen Flag - ID $ArticleIDFirst",
+        "Zoom AJAX article seen flag - ID $ArticleIDFirst",
     );
 
-    %Flags = $TicketObject->ArticleFlagGet(
+    %Flags = $ArticleObject->ArticleFlagGet(
         ArticleID => $ArticleIDSecond,
         UserID    => $TestUser{UserID},
     );
 
     $Self->True(
         $Flags{Seen},
-        "Zoom AJAX Article Seen Flag - ID $ArticleIDSecond",
+        "Zoom AJAX article seen flag - ID $ArticleIDSecond",
     );
 };
 

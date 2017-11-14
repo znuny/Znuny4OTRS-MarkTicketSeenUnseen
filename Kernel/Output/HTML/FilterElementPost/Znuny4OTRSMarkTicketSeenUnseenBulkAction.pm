@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2012-2016 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2017 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -12,15 +12,15 @@ use strict;
 use warnings;
 
 our @ObjectDependencies = (
-    'Kernel::System::Ticket',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Ticket::Article',
+    'Kernel::System::Ticket',
     'Kernel::System::Web::Request',
 );
 
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
 
@@ -30,99 +30,94 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject   = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    my %RequiredGetParam = (
+    my %RequiredGetParams = (
         Action    => 'AgentTicketBulk',
         Subaction => 'Do',
     );
 
     my %GetParam;
-    for my $Param (qw(Action Subaction)) {
+    for my $Param ( sort keys %RequiredGetParams ) {
         $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
 
         return 1 if !$GetParam{$Param};
-        return 1 if $GetParam{$Param} ne $RequiredGetParam{$Param};
+        return 1 if $GetParam{$Param} ne $RequiredGetParams{$Param};
     }
 
-    my %ParamFlagMapping = (
+    my %FlagActionMapping = (
         MarkTicketsAsSeen   => 'Seen',
         MarkTicketsAsUnseen => 'Unseen',
     );
 
-    my @TicketIDs;
-    PARAM:
-    for my $CurrentParam (qw(MarkTicketsAsUnseen MarkTicketsAsSeen)) {
+    my $FlagAction;
+    FLAGACTION:
+    for my $CurrentFlagAction ( sort keys %FlagActionMapping ) {
+        next FLAGACTION if !$ParamObject->GetParam( Param => $CurrentFlagAction );
+        $FlagAction = $CurrentFlagAction;
+        last FLAGACTION;
+    }
+    return 1 if !$FlagAction;
 
-        next PARAM if !$ParamObject->GetParam( Param => $CurrentParam );
+    # determine required function for subaction
+    my $TicketActionFunction  = 'TicketFlagDelete';
+    my $ArticleActionFunction = 'ArticleFlagDelete';
 
-        # determine required function for subaction
-        my $TicketActionFunction  = 'TicketFlagDelete';
-        my $ArticleActionFunction = 'ArticleFlagDelete';
+    if ( $FlagAction eq 'MarkTicketsAsSeen' ) {
+        $TicketActionFunction  = 'TicketFlagSet';
+        $ArticleActionFunction = 'ArticleFlagSet';
+    }
 
-        if ( $CurrentParam eq 'MarkTicketsAsSeen' ) {
-            $TicketActionFunction  = 'TicketFlagSet';
-            $ArticleActionFunction = 'ArticleFlagSet';
-        }
+    # get involved tickets
+    my @TicketIDs = grep {$_} $ParamObject->GetArray( Param => 'TicketID' );
+    return 1 if !@TicketIDs;
 
-        # get involved tickets if not present, filtering empty TicketIDs
-        if ( !@TicketIDs ) {
-            @TicketIDs = grep {$_}
-                $ParamObject->GetArray( Param => 'TicketID' );
-        }
+    TICKETID:
+    for my $TicketID ( sort @TicketIDs ) {
+        my @ArticleIDs = $ArticleObject->ArticleIndex(
+            TicketID => $TicketID,
+        );
 
-        # end loop if no ticket should get edited (?!)
-        last PARAM if !scalar @TicketIDs;
+        ARTICLEID:
+        for my $ArticleID ( sort @ArticleIDs ) {
 
-        TICKET:
-        for my $TicketID ( sort @TicketIDs ) {
-
-            my @ArticleIDs = $TicketObject->ArticleIndex(
-                TicketID => $TicketID,
+            # article flag
+            my $Success = $ArticleObject->$ArticleActionFunction(
+                TicketID  => $TicketID,
+                ArticleID => $ArticleID,
+                Key       => 'Seen',
+                Value     => 1,                         # irrelevant in case of delete
+                UserID    => $LayoutObject->{UserID},
             );
 
-            ARTICLE:
-            for my $ArticleID ( sort @ArticleIDs ) {
+            next ARTICLEID if $Success;
 
-                # article flag
-                my $Success = $TicketObject->$ArticleActionFunction(
-                    ArticleID => $ArticleID,
-                    Key       => 'Seen',
-                    Value     => 1,                         # irrelevant in case of delete
-                    UserID    => $LayoutObject->{UserID},
-                );
-
-                next ARTICLE if $Success;
-
-                $LayoutObject->FatalError(
-                    Message => "Error while setting article with ArticleID '$ArticleID' " .
-                        "of ticket with TicketID '$TicketID' as " .
-                        ( lc $ParamFlagMapping{$CurrentParam} ) .
-                        "!",
-                );
-            }
-
-            # ticket flag
-            my $Success = $TicketObject->$TicketActionFunction(
-                TicketID => $TicketID,
-                Key      => 'Seen',
-                Value    => 1,                         # irrelevant in case of delete
-                UserID   => $LayoutObject->{UserID},
+            $LayoutObject->FatalError(
+                Message => "Error while setting article with ArticleID '$ArticleID' " .
+                    "of ticket with TicketID '$TicketID' as " .
+                    ( lc $FlagActionMapping{$FlagAction} ) .
+                    "!",
             );
-
-            if ( !$Success ) {
-                $LayoutObject->FatalError(
-                    Message => "Error while setting ticket with TicketID '$TicketID' as " .
-                        ( lc $ParamFlagMapping{$CurrentParam} ) .
-                        "!",
-                );
-            }
         }
 
-        # only one action is logical
-        last PARAM;
+        # ticket flag
+        my $Success = $TicketObject->$TicketActionFunction(
+            TicketID => $TicketID,
+            Key      => 'Seen',
+            Value    => 1,                         # irrelevant in case of delete
+            UserID   => $LayoutObject->{UserID},
+        );
+
+        next TICKETID if $Success;
+
+        $LayoutObject->FatalError(
+            Message => "Error while setting ticket with TicketID '$TicketID' as " .
+                ( lc $FlagActionMapping{$FlagAction} ) .
+                "!",
+        );
     }
 
     return 1;

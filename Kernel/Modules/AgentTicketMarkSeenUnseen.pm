@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2012-2016 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2017 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -14,6 +14,7 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::Ticket::Article',
     'Kernel::System::Ticket',
     'Kernel::System::User',
     'Kernel::System::Web::Request',
@@ -22,7 +23,6 @@ our @ObjectDependencies = (
 sub new {
     my ( $Type, %Param ) = @_;
 
-    # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
 
@@ -34,20 +34,19 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ParamObject   = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
 
     my %GetParam;
     for my $Param (qw(TicketID ArticleID Subaction)) {
-
         $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
     }
 
     for my $RequiredParam (qw(TicketID Subaction)) {
-
         if ( !$GetParam{$RequiredParam} ) {
             $LayoutObject->FatalError(
                 Message => "Need $RequiredParam!",
@@ -56,18 +55,16 @@ sub Run {
     }
 
     if ( !scalar grep { $GetParam{Subaction} eq $_ } qw( Seen Unseen ) ) {
-
         $LayoutObject->FatalError(
             Message => "Invalid value '$GetParam{Subaction}' for parameter 'Subaction'!",
         );
     }
 
-    my @ArticleIDs = $TicketObject->ArticleIndex(
+    my @ArticleIDs = $ArticleObject->ArticleIndex(
         TicketID => $GetParam{TicketID},
     );
 
     if ( $GetParam{ArticleID} ) {
-
         if ( !scalar grep { $GetParam{ArticleID} eq $_ } @ArticleIDs ) {
 
             $LayoutObject->FatalError(
@@ -98,10 +95,11 @@ sub Run {
     for my $ArticleID ( sort @ArticleIDs ) {
 
         # article flag
-        my $Success = $TicketObject->$ArticleActionFunction(
+        my $Success = $ArticleObject->$ArticleActionFunction(
+            TicketID  => $GetParam{TicketID},
             ArticleID => $ArticleID,
             Key       => 'Seen',
-            Value     => 1,                 # irrelevant in case of delete
+            Value     => 1,                     # irrelevant in case of delete
             UserID    => $Self->{UserID},
         );
 

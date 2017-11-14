@@ -1,6 +1,6 @@
 ![Znuny logo](http://znuny.com/assets/images/logo_small.png)
 
-Mark Ticket Seen/Unseen
+Mark tickets as seen and unseen
 =================
 With this extension you will be able to mark whole tickets as seen or unseen and articles as unseen again. It's possible to mark single tickets or multiple tickets via the bulk action.
 
@@ -8,7 +8,7 @@ With this extension you will be able to mark whole tickets as seen or unseen and
 
 - [Znuny4OTRS-Repo](http://znuny.com/#!/znuny4otrs)
 
-- OTRS 5.0
+- OTRS 6
 
 **Installation**
 

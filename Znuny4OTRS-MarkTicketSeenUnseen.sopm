@@ -6,50 +6,21 @@
     <ChangeLog Version="1.2.2" Date="2016-03-24 12:19:16 UTC">Fixed js bug: if ticket has no article.</ChangeLog>
     <ChangeLog Version="1.2.1" Date="2016-02-12 12:37:14 UTC">Fixed CodeUpgrade.</ChangeLog>
     <ChangeLog Version="1.2.0" Date="2015-12-11 10:42:55 UTC">Ported to OTRS 5.</ChangeLog>
-    <Framework>5.0.x</Framework>
-    <PackageRequired Version="5.0.15">Znuny4OTRS-Repo</PackageRequired>
+    <Framework>6.0.x</Framework>
+    <PackageRequired Version="6.0.4">Znuny4OTRS-Repo</PackageRequired>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
-    <Description Lang="en">This package contains the functionality to mark whole tickets or single articles as unseen or seen again.</Description>
-    <Description Lang="de">Dieses Paket enthält die Funktionalität um komplette Tickets oder einzelne Artikel wieder als ungelesen oder gelesen zu markieren.</Description>
+    <Description Lang="en">Mark whole tickets or single articles as unseen or seen.</Description>
+    <Description Lang="de">Komplette Tickets oder einzelne Artikel als ungelesen oder gelesen markieren.</Description>
     <Filelist>
-        <File Permission="644" Location="Kernel/Config/Files/Znuny4OTRSMarkTicketSeenUnseen.xml"/>
-        <File Permission="644" Location="Kernel/Language/de_Znuny4OTRSMarkTicketSeenUnseen.pm"/>
-        <File Permission="644" Location="Kernel/Modules/AgentTicketMarkSeenUnseen.pm"/>
-        <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseen.pm"/>
-        <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulk.pm"/>
-        <File Permission="644" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulkAction.pm"/>
-        <File Permission="644" Location="scripts/test/Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseenZoom.t"/>
-        <File Permission="644" Location="var/httpd/htdocs/js/Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js"/>
+        <File Permission="660" Location="Kernel/Config/Files/XML/Znuny4OTRSMarkTicketSeenUnseen.xml"/>
+        <File Permission="660" Location="Kernel/Language/de_Znuny4OTRSMarkTicketSeenUnseen.pm"/>
+        <File Permission="660" Location="Kernel/Modules/AgentTicketMarkSeenUnseen.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseen.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulk.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulkAction.pm"/>
+        <File Permission="660" Location="scripts/test/Znuny4OTRSMarkTicketSeenUnseen/Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseenZoom.t"/>
+        <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js"/>
     </Filelist>
-    <CodeInstall Type="post"><![CDATA[
-
-        my %LoaderData = (
-            AgentTicketZoom => [
-                'Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js',
-            ],
-        );
-        $Kernel::OM->Get('Kernel::System::ZnunyHelper')->_LoaderAdd( %LoaderData );
-
-    ]]></CodeInstall>
-    <CodeUpgrade Type="post"><![CDATA[
-
-        my %LoaderData = (
-            AgentTicketZoom => [
-                'Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js',
-            ],
-        );
-        $Kernel::OM->Get('Kernel::System::ZnunyHelper')->_LoaderAdd( %LoaderData );
-    ]]></CodeUpgrade>
-    <CodeUninstall Type="post"><![CDATA[
-
-        my %LoaderData = (
-            AgentTicketZoom => [
-                'Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js',
-            ],
-        );
-        $Kernel::OM->Get('Kernel::System::ZnunyHelper')->_LoaderRemove( %LoaderData );
-
-    ]]></CodeUninstall>
 </otrs_package>
