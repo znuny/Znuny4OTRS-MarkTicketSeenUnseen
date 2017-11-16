@@ -64,7 +64,7 @@
     </Setting>
     <Setting Name="MarkTicketUnseenRedirectDefaultURL" Required="1" Valid="1">
         <Description Translatable="1">This configuration defines the redirect URL target after a ticket article was set to unseen.</Description>
-        <Navigation>Core</Navigation>
+        <Navigation>Core::Znuny4OTRS::MarkTicketSeenUnseen</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="Action=AgentDashboard">
                 <Item ValueType="Option" Value="Action=AgentDashboard">Dashboard</Item>
@@ -107,7 +107,7 @@
     </Setting>
     <Setting Name="MarkTicketSeenRedirectDefaultURL" Required="1" Valid="1">
         <Description Translatable="1">This configuration defines the redirect URL target after a ticket article was set to unseen.</Description>
-        <Navigation>Core</Navigation>
+        <Navigation>Core::Znuny4OTRS::MarkTicketSeenUnseen</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="Action=AgentDashboard">
                 <Item ValueType="Option" Value="Action=AgentDashboard">Dashboard</Item>
