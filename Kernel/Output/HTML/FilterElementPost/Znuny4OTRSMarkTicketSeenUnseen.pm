@@ -36,7 +36,7 @@ sub Run {
     my $ParamObject    = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     my $TranslateTitle = $LanguageObject->Translate("Mark article as unseen");
-    my $TranslateLink  = $LanguageObject->Translate("Mark unseen");
+    my $TranslateLink  = $LanguageObject->Translate("Mark as unseen");
 
     # check regular parameter
     my $TicketID = $ParamObject->GetParam( Param => 'TicketID' );

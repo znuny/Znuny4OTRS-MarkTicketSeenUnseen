@@ -16,46 +16,44 @@ use utf8;
 sub Data {
     my $Self = shift;
 
-    # menu modules
-    $Self->{Translation}->{"Mark seen"} = "Gelesen markieren";
-    $Self->{Translation}->{"Mark unseen"} = "Ungelesen markieren";
+    # SysConfig
+    $Self->{Translation}->{"Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketUnseenRedirectDefaultURL' is used if no selection is made by the agent."}
+        = "Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung 'MarkTicketUnseenRedirectDefaultURL' wird verwendet, falls der Agent keine Auswahl getroffen hat.";
+    $Self->{Translation}->{"Defines the redirect URL for setting a ticket article to 'unseen."}
+        = "Definiert den URL, zu dem umgeleitet wird, nachdem ein Artikel auf 'ungelesen' gesetzt wurde.";
+    $Self->{Translation}->{"Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketSeenRedirectDefaultURL' is used if no selection is made by the agent."}
+        = "Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung 'MarkTicketSeenRedirectDefaultURL' wird verwendet, falls der Agent keine Auswahl getroffen hat.";
+    $Self->{Translation}->{"Defines the redirect URL for setting a ticket article to 'seen'."}
+        = "Definiert den URL, zu dem umgeleitet wird, nachdem ein Artikel auf 'gelesen' gesetzt wurde.";
+    $Self->{Translation}->{'Registers a link in the ticket menu to mark a ticket as unseen.'}
+        = 'Registriert einen Link im Ticketmenü, um ein Ticket als ungelesen zu markieren.';
+    $Self->{Translation}->{'Registers a link in the ticket menu to mark a ticket as seen.'}
+        = 'Registriert einen Link im Ticketmenü, um ein Ticket als gelesen zu markieren.';
+    $Self->{Translation}->{'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.'}
+        = 'Registriert einen Link im Ticketmenü von Ticketübersichten, um ein Ticket als ungelesen zu markieren.';
+    $Self->{Translation}->{'Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.'}
+        = 'Registriert einen Link im Ticketmenü von Ticketübersichten, um ein Ticket als gelesen zu markieren.';
+    $Self->{Translation}->{"Registers an output filter that adds a 'Mark article as unseen' link to the article menu."}
+        = 'Registriert einen Output-Filter, der einen Link zur Markierung eines Artikels als ungelesen zum Artikelmenü hinzufügt.';
+    $Self->{Translation}->{"Registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view."}
+        = 'Registriert einen Output-Filter, der die Auswahl für als ungelesen zu markierende Tickets zur Sammelaktion-Ansicht hinzufügt.';
+    $Self->{Translation}->{'Mark ticket article(s) as (un)seen'}
+        = 'Ticketartikel als (un)gelesen markieren';
+    $Self->{Translation}->{'Mark ticket as (un)seen'}
+        = 'Ticket als (un)gelesen markieren';
+    $Self->{Translation}->{'Dialog to show after marking a ticket as unseen'}
+        = 'Dialog, der angezeigt wird, nachdem ein Ticket als ungelesen markiert wurde.';
+    $Self->{Translation}->{'Dialog to show after marking a ticket as seen'} = '';
+    $Self->{Translation}->{''} = 'Dialog, der angezeigt wird, nachdem ein Ticket als gelesen markiert wurde.';
+    $Self->{Translation}->{'Mark as unseen'} = 'Als ungelesen markieren';
+    $Self->{Translation}->{'Mark as seen'} = 'Als gelesen markieren';
+    $Self->{Translation}->{'Mark ticket as unseen'} = 'Ticket als ungelesen markieren';
+    $Self->{Translation}->{'Mark ticket as seen'} = 'Ticket als gelesen markieren';
 
-    $Self->{Translation}->{"mark ticket as seen"} = "Ticket als gelesen markieren";
-    $Self->{Translation}->{"mark ticket as unseen"} = "Ticket als ungelesen markieren";
-
-    $Self->{Translation}->{"Mark ticket as seen"} = "Ticket als gelesen markieren";
-    $Self->{Translation}->{"Mark ticket as unseen"} = "Ticket als ungelesen markieren";
-
-    $Self->{Translation}->{"Mark article as unseen"} = "Artikel als ungelesen markieren";
-
-    # bulk action
-    $Self->{Translation}->{"Mark tickets as seen"} = "Tickets als gelesen markieren";
-    $Self->{Translation}->{"Mark tickets as unseen"} = "Tickets als ungelesen markieren";
-
-    # preferences
-    $Self->{Translation}->{"Screen after marking ticket as seen"} = "Ansicht nachdem ein Ticket als gelesen markiert wurde";
-    $Self->{Translation}->{"Screen after marking ticket as unseen"} = "Ansicht nachdem ein Ticket als ungelesen markiert wurde";
-
-    $Self->{Translation}->{"Show this screen after I marked a ticket as seen"} = "Diese Ansicht nach dem als gelesen markieren eines Tickets anzeigen";
-    $Self->{Translation}->{"Show this screen after I marked a ticket as unseen"} = "Diese Ansicht nach dem als ungelesen markieren eines Tickets anzeigen";
-
-    # SysConfigs
-    $Self->{Translation}->{"This configuration defines the config parameters of this item, to be shown in the preferences view. The default redirect URL from SysConfig 'MarkTicketUnseenRedirectDefaultURL' is used if no selection is made by the agent."} = "Diese Konfiguration definiert die Konfigurationsparameter des Elements in persönlichen Einstellungen. Die Standard Weiterleitungs-URL aus der SysConfig 'MarkTicketUnseenRedirectDefaultURL' wird verwendet, wenn keine Auswahl vom Agenten getroffen wurde.";
-    $Self->{Translation}->{"This configuration defines the redirect URL target after a ticket article was set to unseen."} = "Diese Konfiguration definiert die Weiterleitungs-URL nachdem ein Ticket oder Artikel als ungelesen markiert wurde.";
-
-    $Self->{Translation}->{"This configuration defines the config parameters of this item, to be shown in the preferences view. The default redirect URL from SysConfig 'MarkTicketSeenRedirectDefaultURL' is used if no selection is made by the agent."} = "Diese Konfiguration definiert die Konfigurationsparameter des Elements in persönlichen Einstellungen. Die Standard Weiterleitungs-URL aus der SysConfig 'MarkTicketSeenRedirectDefaultURL' wird verwendet, wenn keine Auswahl vom Agenten getroffen wurde.";
-    $Self->{Translation}->{"This configuration defines the redirect URL target after a ticket article was set to unseen."} = "Diese Konfiguration definiert die Weiterleitungs-URL nachdem ein Ticket oder Artikel als gelesen markiert wurde.";
-
-    $Self->{Translation}->{"This configuration registers a link in the ticket menu to mark ticket as unseen."} = "Diese Konfiguration registriert einen Link im Ticket-Menü um das Ticket als ungelesen zu markieren.";
-    $Self->{Translation}->{"This configuration registers a link in the ticket menu to the ticket overviews of the agent interface to mark all articles of the ticket as unseen."} = "Diese Konfiguration registriert einen Link im Ticket-Menü in den Ticket-Übersichten um alle Artikel eines Tickets als ungelesen zu markieren.";
-
-    $Self->{Translation}->{"This configuration registers a link in the ticket menu to mark ticket as seen."} = "Diese Konfiguration registriert einen Link im Ticket-Menü um das Ticket als gelesen zu markieren.";
-    $Self->{Translation}->{"This configuration registers a link in the ticket menu to the ticket overviews of the agent interface to mark all articles of the ticket as seen."} = "Diese Konfiguration registriert einen Link im Ticket-Menü in den Ticket-Übersichten um alle Artikel eines Tickets als gelesen zu markieren.";
-
-    $Self->{Translation}->{"This configuration registers an output filter that adds a 'Mark article as unseen' link to the article menu."} = "Diese Konfiguration registriert einen Outputfilter, der den 'Artikel als ungelesen markieren' zum Artikel-Menü hinzufügt.";
-
-    $Self->{Translation}->{"This configuration registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view."} = "Diese Konfiguration registriert einen Outputfilter, der die 'Tickets als ungelesen markieren' Auswahl zur Sammelaktion-Ansicht hinzufügt.";
-    $Self->{Translation}->{"This configuration registers an output filter that adds the 'Mark tickets as seen' selection to the bulk view."} = "Diese Konfiguration registriert einen Outputfilter, der die 'Tickets als gelesen markieren' Auswahl zur Sammelaktion-Ansicht hinzufügt.";
+    # Templates and output filters
+    $Self->{Translation}->{'Mark article as unseen'} = 'Artikel als ungelesen markieren';
+    $Self->{Translation}->{'Mark tickets as seen'} = 'Tickets als gelesen markieren';
+    $Self->{Translation}->{'Mark tickets as unseen'} = 'Tickets als ungelesen markieren';
 
     return 1;
 }
