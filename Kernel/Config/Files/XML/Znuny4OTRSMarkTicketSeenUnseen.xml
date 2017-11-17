@@ -27,22 +27,22 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">Mark ticket article(s) as seen/unseen</Item>
-                    <Item Key="Title">Mark Ticket Seen/Unseen</Item>
+                    <Item Key="Description">Mark ticket article(s) as (un)seen</Item>
+                    <Item Key="Title">Mark ticket as (un)seen</Item>
                     <Item Key="NavBarName">Ticket</Item>
                 </Hash>
             </Item>
         </Value>
     </Setting>
     <Setting Name="PreferencesGroups###MarkTicketUnseenRedirectURL" Required="0" Valid="1">
-        <Description Translatable="1">This configuration defines the config parameters of this item, to be shown in the preferences view. The default redirect URL from SysConfig 'MarkTicketUnseenRedirectDefaultURL' is used if no selection is made by the agent.</Description>
+        <Description Translatable="1">Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketUnseenRedirectDefaultURL' is used if no selection is made by the agent.</Description>
         <Navigation>Frontend::Agent::View::Preferences</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
-                <Item Key="PreferenceGroup">Other Settings</Item>
-                <Item Key="Label" Translatable="1">Screen after marking ticket as unseen</Item>
-                <Item Key="Key" Translatable="1">Show this screen after I marked a ticket as unseen</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Dialog to show after marking a ticket as unseen</Item>
+                <Item Key="Key" Translatable="1">Dialog to show after marking a ticket as unseen</Item>
                 <Item Key="Data">
                     <Hash>
                         <Item Key="">-</Item>
@@ -63,7 +63,7 @@
         </Value>
     </Setting>
     <Setting Name="MarkTicketUnseenRedirectDefaultURL" Required="1" Valid="1">
-        <Description Translatable="1">This configuration defines the redirect URL target after a ticket article was set to unseen.</Description>
+        <Description Translatable="1">Defines the redirect URL for setting a ticket article to 'unseen'.</Description>
         <Navigation>Core::Znuny4OTRS::MarkTicketSeenUnseen</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="Action=AgentDashboard">
@@ -78,14 +78,14 @@
         </Value>
     </Setting>
     <Setting Name="PreferencesGroups###MarkTicketSeenRedirectURL" Required="0" Valid="1">
-        <Description Translatable="1">This configuration defines the config parameters of this item, to be shown in the preferences view. The default redirect URL from SysConfig 'MarkTicketSeenRedirectDefaultURL' is used if no selection is made by the agent.</Description>
+        <Description Translatable="1">Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketSeenRedirectDefaultURL' is used if no selection is made by the agent.</Description>
         <Navigation>Frontend::Agent::View::Preferences</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
-                <Item Key="PreferenceGroup">Other Settings</Item>
-                <Item Key="Label" Translatable="1">Screen after marking ticket as seen</Item>
-                <Item Key="Key" Translatable="1">Show this screen after I marked a ticket as seen</Item>
+                <Item Key="PreferenceGroup">Miscellaneous</Item>
+                <Item Key="Label" Translatable="1">Dialog to show after marking a ticket as seen</Item>
+                <Item Key="Key" Translatable="1">Dialog to show after marking a ticket as seen</Item>
                 <Item Key="Data">
                     <Hash>
                         <Item Key="">-</Item>
@@ -95,7 +95,7 @@
                         <Item Key="Action=AgentTicketQueue">Queue view</Item>
                         <Item Key="Action=AgentTicketEscalationView">Escalation view</Item>
                         <Item Key="Action=AgentTicketStatusView">Status view</Item>
-                        <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1">Zoom view</Item>
+                        <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1">Ticket Zoom</Item>
                     </Hash>
                 </Item>
                 <Item Key="DataSelected"></Item>
@@ -106,7 +106,7 @@
         </Value>
     </Setting>
     <Setting Name="MarkTicketSeenRedirectDefaultURL" Required="1" Valid="1">
-        <Description Translatable="1">This configuration defines the redirect URL target after a ticket article was set to unseen.</Description>
+        <Description Translatable="1">Defines the redirect URL for setting a ticket article to 'seen'.</Description>
         <Navigation>Core::Znuny4OTRS::MarkTicketSeenUnseen</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="Action=AgentDashboard">
@@ -116,17 +116,17 @@
                 <Item ValueType="Option" Value="Action=AgentTicketQueue">Queue view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketEscalationView">Escalation view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketStatusView">Status view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1">Zoom view</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1">Ticket Zoom</Item>
             </Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::MenuModule###001-MarkTicketUnseen" Required="0" Valid="1">
-        <Description Translatable="1">This configuration registers a link in the ticket menu to mark ticket as unseen.</Description>
+        <Description Translatable="1">Registers a link in the ticket menu to mark a ticket as unseen.</Description>
         <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name">Mark unseen</Item>
+                <Item Key="Name">Mark as unseen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as unseen</Item>
                 <Item Key="Action"></Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %]</Item>
@@ -136,12 +136,12 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::MenuModule###001-MarkTicketSeen" Required="0" Valid="1">
-        <Description Translatable="1">This configuration registers a link in the ticket menu to mark ticket as seen.</Description>
+        <Description Translatable="1">Registers a link in the ticket menu to mark a ticket as seen.</Description>
         <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name">Mark seen</Item>
+                <Item Key="Name">Mark as seen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as seen</Item>
                 <Item Key="Action"></Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %]</Item>
@@ -151,13 +151,13 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::PreMenuModule###442-MarkTicketUnseen" Required="0" Valid="1">
-        <Description Translatable="1">This configuration registers a link in the ticket menu to the ticket overviews of the agent interface to mark all articles of the ticket as unseen.</Description>
+        <Description Translatable="1">Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen.</Description>
         <Navigation>Frontend::Agent::TicketOverview::MenuModule</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name">Mark unseen</Item>
-                <Item Key="Description" Translatable="1">mark ticket as unseen</Item>
+                <Item Key="Name">Mark as unseen</Item>
+                <Item Key="Description" Translatable="1">Mark ticket as unseen</Item>
                 <Item Key="Action"></Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %];RedirectToSearch=1;</Item>
                 <Item Key="Target"></Item>
@@ -166,13 +166,13 @@
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::PreMenuModule###442-MarkTicketSeen" Required="0" Valid="1">
-        <Description Translatable="1">This configuration registers a link in the ticket menu to the ticket overviews of the agent interface to mark all articles of the ticket as seen.</Description>
+        <Description Translatable="1">Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen.</Description>
         <Navigation>Frontend::Agent::TicketOverview::MenuModule</Navigation>
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name">Mark seen</Item>
-                <Item Key="Description" Translatable="1">mark ticket as seen</Item>
+                <Item Key="Name">Mark as seen</Item>
+                <Item Key="Description" Translatable="1">Mark ticket as seen</Item>
                 <Item Key="Action"></Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %];RedirectToSearch=1;</Item>
                 <Item Key="Target"></Item>
@@ -181,7 +181,7 @@
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::FilterElementPost###Znuny4OTRSMarkTicketSeenUnseen" Required="0" Valid="1">
-        <Description Translatable="1">This configuration registers an output filter that adds a 'Mark article as unseen' link to the article menu.</Description>
+        <Description Translatable="1">Registers an output filter that adds a 'Mark article as unseen' link to the article menu.</Description>
         <Navigation>Frontend::Base::OutputFilter</Navigation>
         <Value>
             <Hash>
@@ -195,7 +195,7 @@
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::FilterElementPost###Znuny4OTRSMarkTicketSeenUnseenBulk" Required="0" Valid="1">
-        <Description Translatable="1">This configuration registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view.</Description>
+        <Description Translatable="1">Registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view.</Description>
         <Navigation>Frontend::Base::OutputFilter</Navigation>
         <Value>
             <Hash>
@@ -209,7 +209,7 @@
         </Value>
     </Setting>
     <Setting Name="Frontend::Output::FilterElementPost###Znuny4OTRSMarkTicketSeenUnseenBulkAction" Required="0" Valid="1">
-        <Description Translatable="1">This configuration registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view.</Description>
+        <Description Translatable="1">Registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view.</Description>
         <Navigation>Frontend::Base::OutputFilter</Navigation>
         <Value>
             <Hash>
