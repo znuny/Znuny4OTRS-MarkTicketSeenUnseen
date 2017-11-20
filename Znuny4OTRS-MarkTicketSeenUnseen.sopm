@@ -8,7 +8,7 @@
     <ChangeLog Version="1.2.1" Date="2016-02-12 12:37:14 UTC">Fixed CodeUpgrade.</ChangeLog>
     <ChangeLog Version="1.2.0" Date="2015-12-11 10:42:55 UTC">Ported to OTRS 5.</ChangeLog>
     <Framework>6.0.x</Framework>
-    <PackageRequired Version="6.0.4">Znuny4OTRS-Repo</PackageRequired>
+    <PackageRequired Version="6.0.6">Znuny4OTRS-Repo</PackageRequired>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
@@ -18,10 +18,22 @@
         <File Permission="660" Location="Kernel/Config/Files/XML/Znuny4OTRSMarkTicketSeenUnseen.xml"/>
         <File Permission="660" Location="Kernel/Language/de_Znuny4OTRSMarkTicketSeenUnseen.pm"/>
         <File Permission="660" Location="Kernel/Modules/AgentTicketMarkSeenUnseen.pm"/>
-        <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseen.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm"/>
         <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulk.pm"/>
         <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulkAction.pm"/>
         <File Permission="660" Location="scripts/test/Znuny4OTRSMarkTicketSeenUnseen/Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseenZoom.t"/>
-        <File Permission="660" Location="var/httpd/htdocs/js/Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js"/>
+        <File Permission="660" Location="var/packagesetup/Znuny4OTRSMarkTicketSeenUnseen.pm"/>
     </Filelist>
+    <CodeUninstall Type="pre"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen')->CodeUninstall();
+    ]]></CodeUninstall>
+    <CodeInstall Type="post"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen')->CodeInstall();
+    ]]></CodeInstall>
+    <CodeUpgrade Type="post"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen')->CodeUpgrade();
+    ]]></CodeUpgrade>
+    <CodeReinstall Type="post"><![CDATA[
+        $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen')->CodeReinstall();
+    ]]></CodeReinstall>
 </otrs_package>
