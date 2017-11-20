@@ -1,18 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Changes">
-    <Setting Name="Loader::Module::AgentTicketZoom###999-Znuny4OTRSMarkTicketSeenUnseen" Required="1" Valid="1">
-        <Description Translatable="1">Loader module registration for the agent interface.</Description>
-        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="JavaScript">
-                    <Array>
-                        <Item>Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.js</Item>
-                    </Array>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="Frontend::Module###AgentTicketMarkSeenUnseen" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
@@ -177,20 +164,6 @@
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %];RedirectToSearch=1;</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::Output::FilterElementPost###Znuny4OTRSMarkTicketSeenUnseen" Required="0" Valid="1">
-        <Description Translatable="1">Registers an output filter that adds a 'Mark article as unseen' link to the article menu.</Description>
-        <Navigation>Frontend::Base::OutputFilter</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::FilterElementPost::Znuny4OTRSMarkTicketSeenUnseen</Item>
-                <Item Key="Templates">
-                <Hash>
-                    <Item Key="AgentTicketZoom">1</Item>
-                </Hash>
-                </Item>
             </Hash>
         </Value>
     </Setting>
