@@ -51,24 +51,24 @@ my $SeleniumTest = sub {
 
     # check for elements
     $Self->True(
-        $SeleniumObject->find_element( 'li#nav-Mark-seen a', 'css' )->is_displayed(),
+        $SeleniumObject->find_element( 'li#nav-Mark-as-seen a', 'css' )->is_displayed(),
         '"Mark ticket as seen" link is visible',
     );
 
     $Self->True(
-        $SeleniumObject->find_element( 'li#nav-Mark-unseen a', 'css' )->is_displayed(),
+        $SeleniumObject->find_element( 'li#nav-Mark-as-unseen a', 'css' )->is_displayed(),
         '"Mark ticket as unseen" link is visible',
     );
 
     $Self->True(
-        $SeleniumObject->find_element( '#AgentTicketMarkSeenUnseenArticle', 'css' )->is_displayed(),
+        $SeleniumObject->find_element( 'a.AgentTicketMarkSeenUnseenArticle', 'css' )->is_displayed(),
         '"Mark article as unseen" link is visible',
     );
 
     # mark ticket as unseen
     # TODO: Unknown, why click AND AgentInterface call are both necessary. If one is omitted,
     # not all articles will be marked as unseen. Manual testing works.
-    $SeleniumObject->find_element( 'li#nav-Mark-unseen a', 'css' )->click();
+    $SeleniumObject->find_element( 'li#nav-Mark-as-unseen a', 'css' )->click();
     $SeleniumObject->AgentInterface(
         Action      => 'AgentTicketMarkSeenUnseen',
         Subaction   => 'Unseen',
