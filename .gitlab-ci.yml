@@ -3,6 +3,7 @@ image: registry.znuny.com/znuny/docker-otrs6ci:latest
 services:
   - name: registry.znuny.com/znuny/docker-mysql-utf8:latest
     alias: mysql
+  - name: docker.io/elgalu/selenium:latest
 
 stages:
   - test
