@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2012-2017 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2018 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -43,8 +43,7 @@ sub Data {
         = 'Ticket als (un)gelesen markieren';
     $Self->{Translation}->{'Dialog to show after marking a ticket as unseen'}
         = 'Dialog, der angezeigt wird, nachdem ein Ticket als ungelesen markiert wurde.';
-    $Self->{Translation}->{'Dialog to show after marking a ticket as seen'} = '';
-    $Self->{Translation}->{''} = 'Dialog, der angezeigt wird, nachdem ein Ticket als gelesen markiert wurde.';
+    $Self->{Translation}->{'Dialog to show after marking a ticket as seen'} = 'Dialog, der angezeigt wird, nachdem ein Ticket als gelesen markiert wurde.';
     $Self->{Translation}->{'Mark as unseen'} = 'Als ungelesen markieren';
     $Self->{Translation}->{'Mark as seen'} = 'Als gelesen markieren';
     $Self->{Translation}->{'Mark ticket as unseen'} = 'Ticket als ungelesen markieren';
