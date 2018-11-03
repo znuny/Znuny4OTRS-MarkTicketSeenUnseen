@@ -3,12 +3,12 @@
     <Name>Znuny4OTRS-MarkTicketSeenUnseen</Name>
     <Version>1.0.0</Version>
     <Framework>4.0.x</Framework>
+    <PackageRequired Version="4.0.1">Znuny4OTRS-Repo</PackageRequired>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">This package contains the functionality to mark whole tickets or single articles as unseen or seen again.</Description>
     <Description Lang="de">Dieses Paket enthält die Funktionalität um komplette Tickets oder einzelne Artikel wieder als ungelesen oder gelesen zu markieren.</Description>
-    <PackageRequired Version="2.0.5">Znuny4OTRS-Repo</PackageRequired>
     <Filelist>
         <File Permission="644" Location="Kernel/Config/Files/Znuny4OTRSMarkTicketSeenUnseen.xml"/>
         <File Permission="644" Location="Kernel/Language/de_Znuny4OTRSMarkTicketSeenUnseen.pm"/>

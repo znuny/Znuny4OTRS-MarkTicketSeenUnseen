@@ -1,6 +1,5 @@
 # --
-# Kernel/Modules/AgentTicketMarkSeenUnseen.pm - to mark tickets and articles as seen or unseen
-# Copyright (C) 2014 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2018 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -12,6 +11,14 @@ package Kernel::Modules::AgentTicketMarkSeenUnseen;
 use strict;
 use warnings;
 
+our @ObjectDependencies = (
+    'Kernel::Config',
+    'Kernel::Output::HTML::Layout',
+    'Kernel::System::Ticket',
+    'Kernel::System::User',
+    'Kernel::System::Web::Request',
+);
+
 sub new {
     my ( $Type, %Param ) = @_;
 
@@ -21,10 +28,12 @@ sub new {
 
     $Self->{Debug} = $Param{Debug} || 0;
 
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
     # check all needed objects
-    for (qw(TicketObject ParamObject LayoutObject ConfigObject LogObject UserObject)) {
-        if ( !$Self->{$_} ) {
-            $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError( Message => "Got no $_!" );
+    for my $Needed (qw(TicketObject ParamObject LayoutObject ConfigObject LogObject UserObject)) {
+        if ( !$Self->{$Needed} ) {
+            $LayoutObject->FatalError( Message => "Got no $Needed!" );
         }
     }
 
@@ -34,22 +43,21 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $UserObject      = $Kernel::OM->Get('Kernel::System::User');
-    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
-
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my %GetParam;
-    for my $Param ( qw(TicketID ArticleID Subaction) ) {
+    for my $Param (qw(TicketID ArticleID Subaction)) {
 
-        $GetParam{ $Param } = $ParamObject->GetParam( Param => $Param );
+        $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
     }
 
-    for my $RequiredParam ( qw(TicketID Subaction) ) {
+    for my $RequiredParam (qw(TicketID Subaction)) {
 
-        if ( !$GetParam{ $RequiredParam } ) {
+        if ( !$GetParam{$RequiredParam} ) {
             $LayoutObject->FatalError(
                 Message => "Need $RequiredParam!",
             );
@@ -80,7 +88,7 @@ sub Run {
         @ArticleIDs = reverse @ArticleIDs;
 
         # remember article index for later replacement in redirect URL
-        ( $GetParam{ArticleIndex} ) = grep { $ArticleIDs[ $_ ] eq $GetParam{ArticleID} } 0..$#ArticleIDs;
+        ( $GetParam{ArticleIndex} ) = grep { $ArticleIDs[$_] eq $GetParam{ArticleID} } 0 .. $#ArticleIDs;
 
         @ArticleIDs = ( $GetParam{ArticleID} );
     }
@@ -102,17 +110,17 @@ sub Run {
         my $Success = $TicketObject->$ArticleActionFunction(
             ArticleID => $ArticleID,
             Key       => 'Seen',
-            Value     => 1,               # irrelevant in case of delete
+            Value     => 1,                 # irrelevant in case of delete
             UserID    => $Self->{UserID},
         );
 
         next ARTICLE if $Success;
 
         $LayoutObject->FatalError(
-            Message => "Error while setting article with ArticleID '$ArticleID' ".
-                        "of ticket with TicketID '$GetParam{TicketID}' as ".
-                        ( lc $GetParam{Subaction} ).
-                        "!",
+            Message => "Error while setting article with ArticleID '$ArticleID' " .
+                "of ticket with TicketID '$GetParam{TicketID}' as " .
+                ( lc $GetParam{Subaction} ) .
+                "!",
         );
     }
 
@@ -120,16 +128,16 @@ sub Run {
     my $Success = $TicketObject->$TicketActionFunction(
         TicketID => $GetParam{TicketID},
         Key      => 'Seen',
-        Value    => 1,               # irrelevant in case of delete
+        Value    => 1,                     # irrelevant in case of delete
         UserID   => $Self->{UserID},
     );
 
     if ( !$Success ) {
         $LayoutObject->FatalError(
-            Message => "Error while setting ticket with ".
-                        "TicketID '$GetParam{TicketID}' as ".
-                        ( lc $GetParam{Subaction} ).
-                        "!",
+            Message => "Error while setting ticket with " .
+                "TicketID '$GetParam{TicketID}' as " .
+                ( lc $GetParam{Subaction} ) .
+                "!",
         );
     }
 
@@ -144,15 +152,15 @@ sub Run {
         UserID => $Self->{UserID},
     );
 
-    my $RedirectURL = $UserPreferences{'UserMarkTicket'. $GetParam{Subaction} .'RedirectURL'};
-    $RedirectURL  ||= $ConfigObject->Get('MarkTicket'. $GetParam{Subaction} .'RedirectDefaultURL');
-    $RedirectURL  ||= 'Action=AgentTicketZoom;TicketID=###TicketID###';
+    my $RedirectURL = $UserPreferences{ 'UserMarkTicket' . $GetParam{Subaction} . 'RedirectURL' };
+    $RedirectURL ||= $ConfigObject->Get( 'MarkTicket' . $GetParam{Subaction} . 'RedirectDefaultURL' );
+    $RedirectURL ||= 'Action=AgentTicketZoom;TicketID=###TicketID###';
 
     REPLACE:
-    for my $ReplaceParam ( qw(TicketID ArticleID ArticleIndex) ) {
+    for my $ReplaceParam (qw(TicketID ArticleID ArticleIndex)) {
 
         # make sure the placeholder gets replaced
-        $GetParam{ $ReplaceParam } ||= '';
+        $GetParam{$ReplaceParam} ||= '';
 
         $RedirectURL =~ s{###$ReplaceParam###}{$GetParam{$ReplaceParam}}g;
     }

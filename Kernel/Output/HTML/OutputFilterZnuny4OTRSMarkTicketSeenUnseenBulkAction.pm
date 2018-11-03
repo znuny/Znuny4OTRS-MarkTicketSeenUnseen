@@ -1,6 +1,5 @@
 # --
-# Kernel/Output/HTML/OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulkAction.pm - handles the 'Mark tickets as unseen' selection made in the buk action view
-# Copyright (C) 2014 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2018 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -31,9 +30,9 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $LayoutObject    =$Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my %RequiredGetParam = (
         Action    => 'AgentTicketBulk',
@@ -41,11 +40,11 @@ sub Run {
     );
 
     my %GetParam;
-    for my $Param ( qw(Action Subaction) ) {
-        $GetParam{ $Param } = $ParamObject->GetParam( Param => $Param );
+    for my $Param (qw(Action Subaction)) {
+        $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
 
-        return 1 if !$GetParam{ $Param };
-        return 1 if $GetParam{ $Param } ne $RequiredGetParam{ $Param };
+        return 1 if !$GetParam{$Param};
+        return 1 if $GetParam{$Param} ne $RequiredGetParam{$Param};
     }
 
     my %ParamFlagMapping = (
@@ -55,7 +54,7 @@ sub Run {
 
     my @TicketIDs;
     PARAM:
-    for my $CurrentParam ( qw(MarkTicketsAsUnseen MarkTicketsAsSeen) ) {
+    for my $CurrentParam (qw(MarkTicketsAsUnseen MarkTicketsAsSeen)) {
 
         next PARAM if !$ParamObject->GetParam( Param => $CurrentParam );
 
@@ -70,8 +69,7 @@ sub Run {
 
         # get involved tickets if not present, filtering empty TicketIDs
         if ( !@TicketIDs ) {
-            @TicketIDs
-                = grep {$_}
+            @TicketIDs = grep {$_}
                 $ParamObject->GetArray( Param => 'TicketID' );
         }
 
@@ -92,17 +90,17 @@ sub Run {
                 my $Success = $TicketObject->$ArticleActionFunction(
                     ArticleID => $ArticleID,
                     Key       => 'Seen',
-                    Value     => 1,                               # irrelevant in case of delete
+                    Value     => 1,                         # irrelevant in case of delete
                     UserID    => $LayoutObject->{UserID},
                 );
 
                 next ARTICLE if $Success;
 
                 $LayoutObject->FatalError(
-                    Message => "Error while setting article with ArticleID '$ArticleID' ".
-                                "of ticket with TicketID '$TicketID' as ".
-                                ( lc $ParamFlagMapping{ $CurrentParam } ) .
-                                "!",
+                    Message => "Error while setting article with ArticleID '$ArticleID' " .
+                        "of ticket with TicketID '$TicketID' as " .
+                        ( lc $ParamFlagMapping{$CurrentParam} ) .
+                        "!",
                 );
             }
 
@@ -110,15 +108,15 @@ sub Run {
             my $Success = $TicketObject->$TicketActionFunction(
                 TicketID => $TicketID,
                 Key      => 'Seen',
-                Value    => 1,                               # irrelevant in case of delete
+                Value    => 1,                         # irrelevant in case of delete
                 UserID   => $LayoutObject->{UserID},
             );
 
             if ( !$Success ) {
                 $LayoutObject->FatalError(
-                    Message => "Error while setting ticket with TicketID '$TicketID' as ".
-                                ( lc $ParamFlagMapping{ $CurrentParam } ) .
-                                "!",
+                    Message => "Error while setting ticket with TicketID '$TicketID' as " .
+                        ( lc $ParamFlagMapping{$CurrentParam} ) .
+                        "!",
                 );
             }
         }
