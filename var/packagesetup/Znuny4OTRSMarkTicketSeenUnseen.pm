@@ -23,7 +23,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 =head1 NAME
 
-Znuny4OTRSMarkTicketSeenUnseen.pm - code to execute during package installation
+var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen - code to execute during package installation
 
 =head1 SYNOPSIS
 
