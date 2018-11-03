@@ -1,5 +1,5 @@
 # --
-# Copyright (C) 2012-2016 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2018 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -34,13 +34,13 @@ sub Run {
 
     my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
 
-    my $TranslateTitle
-        = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{LanguageObject}->Translate("Mark article as unseen");
-    my $TranslateLink = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{LanguageObject}->Translate("Mark unseen");
+    my $TranslateTitle = $LayoutObject->{LanguageObject}->Translate("Mark article as unseen");
+    my $TranslateLink  = $LayoutObject->{LanguageObject}->Translate("Mark unseen");
 
     # check regular parameter
-    my $TicketID = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'TicketID' );
+    my $TicketID = $ParamObject->GetParam( Param => 'TicketID' );
 
     my $JSBlock = <<"JS_BLOCK";
     Core.Agent.Znuny4OTRSMarkTicketSeenUnseen.Init({TicketID:'$TicketID', TranslateTitle:'$TranslateTitle', TranslateLink:'$TranslateLink', });
