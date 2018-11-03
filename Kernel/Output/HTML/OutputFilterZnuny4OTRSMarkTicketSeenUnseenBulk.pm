@@ -1,6 +1,5 @@
 # --
-# Kernel/Output/HTML/OutputFilterZnuny4OTRSMarkTicketSeenUnseenBulk.pm - adds a the 'Mark tickets as seen' and 'Mark tickets as unseen' selections to the buk action view
-# Copyright (C) 2014 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2018 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -31,6 +30,9 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my %ParamLabel = (
         MarkTicketsAsSeen   => "Mark tickets as seen",
@@ -38,12 +40,12 @@ sub Run {
     );
 
     PARAM:
-    for my $CurrentParam ( qw( MarkTicketsAsSeen MarkTicketsAsUnseen ) ) {
+    for my $CurrentParam (qw( MarkTicketsAsSeen MarkTicketsAsUnseen )) {
 
-        my $CurrentParamValue = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => $CurrentParam );
+        my $CurrentParamValue = $ParamObject->GetParam( Param => $CurrentParam );
 
-        my $SelectHTML = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
-            Data       => $Kernel::OM->Get('Kernel::Config')->Get('YesNoOptions'),
+        my $SelectHTML = $LayoutObject->BuildSelection(
+            Data       => $ConfigObject->Get('YesNoOptions'),
             Name       => $CurrentParam,
             SelectedID => $CurrentParamValue || 0,
         );
