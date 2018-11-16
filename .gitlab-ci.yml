@@ -21,5 +21,4 @@ job_unit_otrs_Znuny4OTRSMarkTicketSeenUnseen:
 job_deploy_otrs_Znuny4OTRSMarkTicketSeenUnseen:
   stage: deploy
   script:
-    - git config --global push.default simple
     - sh /sync_repo.sh git@github.com:znuny/Znuny4OTRS-MarkTicketSeenUnseen.git
