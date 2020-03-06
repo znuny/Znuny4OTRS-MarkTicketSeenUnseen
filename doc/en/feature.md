@@ -1,4 +1,6 @@
-# Mark tickets as read/unread
+# Functionality
+
+## Mark tickets as read/unread
 
 In OTRS it is not possible to mark tickets (all articles of a ticket) as read or unread. This package adds this functionality to OTRS.
 
