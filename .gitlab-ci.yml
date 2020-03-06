@@ -1,24 +1,12 @@
-image: registry.znuny.com/znuny/docker-otrs6ci:latest
+image: registry.znuny.com/znuny/internal/docker-otrs6ci:$OTRS_TAG
 
-services:
-  - name: registry.znuny.com/znuny/docker-mysql-utf8:latest
-    alias: mysql
-  - name: docker.io/elgalu/selenium:latest
+include:
+  - project: 'Znuny/Internal/Znuny'
+    file: '/templates/gitlab/.gitlab-ci-default.yml'
 
-stages:
-  - test
-  - deploy
-
-job_unit_otrs_Znuny4OTRSMarkTicketSeenUnseen:
-  stage: test
-  script:
-    - env
-    - pwd
+default:
+  before_script:
     - /run.sh
-    - su -c "perl /opt/otrs/bin/otrs.Console.pl Znuny4OTRS::AdvancedPackageManager::InstallSOPM /opt/otrs/Znuny4OTRS-MarkTicketSeenUnseen.sopm" -s /bin/bash otrs
-    - su -c "perl /opt/otrs/bin/otrs.Console.pl Dev::UnitTest::Run --test Znuny4OTRSMarkTicketSeenUnseen/Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseenZoom" -s /bin/bash otrs
-
-job_deploy_otrs_Znuny4OTRSMarkTicketSeenUnseen:
-  stage: deploy
-  script:
-    - sh /sync_repo.sh git@github.com:znuny/Znuny4OTRS-MarkTicketSeenUnseen.git
+    - su -c "perl /opt/otrs/bin/otrs.Console.pl Znuny4OTRS::AdvancedPackageManager::InstallSOPM /opt/otrs/$CI_PROJECT_NAME.sopm" -s /bin/bash otrs
+  after_script:
+    - /unittest.sh

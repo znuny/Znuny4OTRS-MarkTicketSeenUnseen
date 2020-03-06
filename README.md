@@ -1,5 +1,8 @@
 ![Znuny logo](http://znuny.com/assets/images/logo_small.png)
 
+
+![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-MarkTicketSeenUnseen/master)
+
 Mark tickets as seen and unseen
 =================
 With this extension you will be able to mark whole tickets as seen or unseen and articles as unseen again. It's possible to mark single tickets or multiple tickets via the bulk action.

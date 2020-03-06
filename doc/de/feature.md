@@ -1,4 +1,6 @@
-# Tickets als gelesen/ungelesen markieren
+# Funktionalität
+
+## Tickets als gelesen/ungelesen markieren
 
 In OTRS ist es nicht möglich, Tickets (also alle Artikel eines Tickets) als gelesen oder ungelesen zu markieren. Dieses Paket ergänzt OTRS um diese Funktionalität.
 
