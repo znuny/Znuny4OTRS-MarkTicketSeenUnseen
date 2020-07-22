@@ -33,13 +33,13 @@
                 <Item Key="Data">
                     <Hash>
                         <Item Key="">-</Item>
-                        <Item Key="Action=AgentDashboard">Dashboard</Item>
-                        <Item Key="Action=AgentTicketPhone">New phone ticket</Item>
-                        <Item Key="Action=AgentTicketEmail">New email ticket</Item>
-                        <Item Key="Action=AgentTicketQueue">Queue view</Item>
-                        <Item Key="Action=AgentTicketEscalationView">Escalation view</Item>
-                        <Item Key="Action=AgentTicketStatusView">Status view</Item>
-                        <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1">Zoom view</Item>
+                        <Item Key="Action=AgentDashboard" Translatable="1">Dashboard</Item>
+                        <Item Key="Action=AgentTicketPhone" Translatable="1">New phone ticket</Item>
+                        <Item Key="Action=AgentTicketEmail" Translatable="1">New email ticket</Item>
+                        <Item Key="Action=AgentTicketQueue" Translatable="1">Queue view</Item>
+                        <Item Key="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
+                        <Item Key="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
+                        <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
                     </Hash>
                 </Item>
                 <Item Key="DataSelected"></Item>
@@ -54,13 +54,13 @@
         <Navigation>Core::Znuny4OTRS::MarkTicketSeenUnseen</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="Action=AgentDashboard">
-                <Item ValueType="Option" Value="Action=AgentDashboard">Dashboard</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketPhone">New phone ticket</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketEmail">New email ticket</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketQueue">Queue view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketEscalationView">Escalation view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketStatusView">Status view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1">Zoom view</Item>
+                <Item ValueType="Option" Value="Action=AgentDashboard" Translatable="1">Dashboard</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketPhone" Translatable="1">New phone ticket</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketEmail" Translatable="1">New email ticket</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketQueue" Translatable="1">Queue view</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
             </Item>
         </Value>
     </Setting>
@@ -76,13 +76,13 @@
                 <Item Key="Data">
                     <Hash>
                         <Item Key="">-</Item>
-                        <Item Key="Action=AgentDashboard">Dashboard</Item>
-                        <Item Key="Action=AgentTicketPhone">New phone ticket</Item>
-                        <Item Key="Action=AgentTicketEmail">New email ticket</Item>
-                        <Item Key="Action=AgentTicketQueue">Queue view</Item>
-                        <Item Key="Action=AgentTicketEscalationView">Escalation view</Item>
-                        <Item Key="Action=AgentTicketStatusView">Status view</Item>
-                        <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1">Ticket Zoom</Item>
+                        <Item Key="Action=AgentDashboard" Translatable="1">Dashboard</Item>
+                        <Item Key="Action=AgentTicketPhone" Translatable="1">New phone ticket</Item>
+                        <Item Key="Action=AgentTicketEmail" Translatable="1">New email ticket</Item>
+                        <Item Key="Action=AgentTicketQueue" Translatable="1">Queue view</Item>
+                        <Item Key="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
+                        <Item Key="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
+                        <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
                     </Hash>
                 </Item>
                 <Item Key="DataSelected"></Item>
@@ -97,13 +97,13 @@
         <Navigation>Core::Znuny4OTRS::MarkTicketSeenUnseen</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="Action=AgentDashboard">
-                <Item ValueType="Option" Value="Action=AgentDashboard">Dashboard</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketPhone">New phone ticket</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketEmail">New email ticket</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketQueue">Queue view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketEscalationView">Escalation view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketStatusView">Status view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1">Ticket Zoom</Item>
+                <Item ValueType="Option" Value="Action=AgentDashboard" Translatable="1">Dashboard</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketPhone" Translatable="1">New phone ticket</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketEmail" Translatable="1">New email ticket</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketQueue" Translatable="1">Queue view</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
+                <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
             </Item>
         </Value>
     </Setting>
