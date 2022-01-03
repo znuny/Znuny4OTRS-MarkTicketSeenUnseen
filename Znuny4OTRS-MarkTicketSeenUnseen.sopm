@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.0">
     <Name>Znuny4OTRS-MarkTicketSeenUnseen</Name>
-    <Version>5.0.1</Version>
+    <Version>5.0.2</Version>
+    <ChangeLog Version="5.0.2" Date="2022-01-03 11:29:22 +0100">Applied CP.</ChangeLog>
     <ChangeLog Version="5.0.1" Date="2018-11-20 12:24:31 +0100">Tidied code.</ChangeLog>
     <ChangeLog Version="5.0.0" Date="2016-11-28 13:23:25 +0100">Fixed JS error on framework 5.0.14 on tickets without article. Thanks to straubr.</ChangeLog>
     <ChangeLog Version="1.2.2" Date="2016-03-24 12:19:16 UTC">Fixed js bug: if ticket has no article.</ChangeLog>
