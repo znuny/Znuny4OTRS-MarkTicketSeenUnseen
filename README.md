@@ -12,7 +12,7 @@ With this extension you will be able to mark whole tickets as seen or unseen and
 
 **Installation**
 
-Download the [package](https://addons.znuny.com/api/addon_repos/public/2099/latest) and install it via admin interface -> package manager.
+Download the [package](https://addons.znuny.com/api/addon_repos/public/2100/latest) and install it via admin interface -> package manager.
 
 **Configuration**
 
@@ -20,7 +20,7 @@ No further configuration required.
 
 **Download**
 
-Download the [latest version](https://addons.znuny.com/api/addon_repos/public/2099/latest).
+Download the [latest version](https://addons.znuny.com/api/addon_repos/public/2100/latest).
 
 **Commercial Support**
 
