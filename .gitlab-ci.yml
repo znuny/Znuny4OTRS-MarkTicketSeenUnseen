@@ -1,13 +1,9 @@
-image: registry.znuny.com/znuny/docker-otrs4ci:latest
+image: registry.znuny.com/znuny/internal/docker-otrs4ci:latest
 
-services:
-  - name: registry.znuny.com/znuny/docker-mysql-utf8:latest
-    alias: mysql
+include:
+  - project: 'Znuny/Internal/Znuny'
+    file: '/templates/gitlab/default/default.yml'
 
-stages:
-  - deploy
-
-job_deploy_otrs_Znuny4OTRSMarkTicketSeenUnseen:
-  stage: deploy
-  script:
-    - sh /sync_repo.sh git@github.com:znuny/Znuny4OTRS-MarkTicketSeenUnseen.git
+default:
+  before_script:
+    - /run.sh
