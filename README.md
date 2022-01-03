@@ -1,7 +1,7 @@
 ![Znuny logo](https://www.znuny.com/assets/images/logo_small.png)
 
 
-![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-MarkTicketSeenUnseen/master)
+![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-MarkTicketSeenUnseen/rel-6_1)
 
 Mark tickets as seen and unseen
 =================
