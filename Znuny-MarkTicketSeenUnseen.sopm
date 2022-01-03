@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.0">
     <Name>Znuny-MarkTicketSeenUnseen</Name>
-    <Version>6.0.7</Version>
+    <Version>6.1.1</Version>
+    <ChangeLog Version="6.1.1" Date="2022-01-03 14:39:29 +0100">Ported to OTRS 6.1.</ChangeLog>
     <ChangeLog Version="6.0.7" Date="2021-02-12 17:44:20 +0100">Happy new year. Tidied code.</ChangeLog>
     <ChangeLog Version="6.0.6" Date="2020-07-22 16:26:18 +0200">Issue #3: Fixed texts and translations of SysConfig options.</ChangeLog>
     <ChangeLog Version="6.0.5" Date="2018-11-16 11:19:17 +0100">Tidied code.</ChangeLog>
@@ -41,5 +42,5 @@
     <CodeReinstall Type="post"><![CDATA[
         $Kernel::OM->Get('var::packagesetup::ZnunyMarkTicketSeenUnseen')->CodeReinstall();
     ]]></CodeReinstall>
-    <PackageMerge Name="Znuny4OTRS-MarkTicketSeenUnseen" TargetVersion="6.0.7"></PackageMerge>
+    <PackageMerge Name="Znuny4OTRS-MarkTicketSeenUnseen" TargetVersion="6.0.7"/>
 </otrs_package>
