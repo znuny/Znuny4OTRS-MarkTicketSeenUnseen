@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.0">
-    <Name>Znuny4OTRS-MarkTicketSeenUnseen</Name>
+    <Name>Znuny-MarkTicketSeenUnseen</Name>
     <Version>6.0.7</Version>
     <ChangeLog Version="6.0.7" Date="2021-02-12 17:44:20 +0100">Happy new year. Tidied code.</ChangeLog>
     <ChangeLog Version="6.0.6" Date="2020-07-22 16:26:18 +0200">Issue #3: Fixed texts and translations of SysConfig options.</ChangeLog>
@@ -13,33 +13,33 @@
     <ChangeLog Version="1.2.2" Date="2016-03-24 12:19:16 UTC">Fixed js bug: if ticket has no article.</ChangeLog>
     <ChangeLog Version="1.2.1" Date="2016-02-12 12:37:14 UTC">Fixed CodeUpgrade.</ChangeLog>
     <ChangeLog Version="1.2.0" Date="2015-12-11 10:42:55 UTC">Ported to OTRS 5.</ChangeLog>
-    <Framework>6.0.x</Framework>
-    <PackageRequired Version="6.0.71">Znuny4OTRS-Repo</PackageRequired>
+    <Framework>6.1.x</Framework>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">Mark whole tickets or single articles as unseen or seen.</Description>
     <Description Lang="de">Komplette Tickets oder einzelne Artikel als ungelesen oder gelesen markieren.</Description>
     <Filelist>
-        <File Permission="660" Location="Kernel/Config/Files/XML/Znuny4OTRSMarkTicketSeenUnseen.xml"/>
-        <File Permission="660" Location="Kernel/Language/de_Znuny4OTRSMarkTicketSeenUnseen.pm"/>
+        <File Permission="660" Location="Kernel/Config/Files/XML/ZnunyMarkTicketSeenUnseen.xml"/>
+        <File Permission="660" Location="Kernel/Language/de_ZnunyMarkTicketSeenUnseen.pm"/>
         <File Permission="660" Location="Kernel/Modules/AgentTicketMarkSeenUnseen.pm"/>
         <File Permission="660" Location="Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm"/>
-        <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulk.pm"/>
-        <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/Znuny4OTRSMarkTicketSeenUnseenBulkAction.pm"/>
-        <File Permission="660" Location="scripts/test/Znuny4OTRSMarkTicketSeenUnseen/Selenium/Agent/Znuny4OTRSMarkTicketSeenUnseenZoom.t"/>
-        <File Permission="660" Location="var/packagesetup/Znuny4OTRSMarkTicketSeenUnseen.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/ZnunyMarkTicketSeenUnseenBulk.pm"/>
+        <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/ZnunyMarkTicketSeenUnseenBulkAction.pm"/>
+        <File Permission="660" Location="scripts/test/ZnunyMarkTicketSeenUnseen/Selenium/Agent/ZnunyMarkTicketSeenUnseenZoom.t"/>
+        <File Permission="660" Location="var/packagesetup/ZnunyMarkTicketSeenUnseen.pm"/>
     </Filelist>
     <CodeUninstall Type="pre"><![CDATA[
-        $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen')->CodeUninstall();
+        $Kernel::OM->Get('var::packagesetup::ZnunyMarkTicketSeenUnseen')->CodeUninstall();
     ]]></CodeUninstall>
     <CodeInstall Type="post"><![CDATA[
-        $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen')->CodeInstall();
+        $Kernel::OM->Get('var::packagesetup::ZnunyMarkTicketSeenUnseen')->CodeInstall();
     ]]></CodeInstall>
     <CodeUpgrade Type="post"><![CDATA[
-        $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen')->CodeUpgrade();
+        $Kernel::OM->Get('var::packagesetup::ZnunyMarkTicketSeenUnseen')->CodeUpgrade();
     ]]></CodeUpgrade>
     <CodeReinstall Type="post"><![CDATA[
-        $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen')->CodeReinstall();
+        $Kernel::OM->Get('var::packagesetup::ZnunyMarkTicketSeenUnseen')->CodeReinstall();
     ]]></CodeReinstall>
+    <PackageMerge Name="Znuny4OTRS-MarkTicketSeenUnseen" TargetVersion="6.0.7"></PackageMerge>
 </otrs_package>

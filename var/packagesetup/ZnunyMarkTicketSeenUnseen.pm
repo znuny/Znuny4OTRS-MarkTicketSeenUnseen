@@ -1,12 +1,12 @@
 # --
-# Copyright (C) 2012-2021 Znuny GmbH, http://znuny.com/
+# Copyright (C) 2012-2022 Znuny GmbH, http://znuny.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen;    ## no critic
+package var::packagesetup::ZnunyMarkTicketSeenUnseen;    ## no critic
 
 use strict;
 use warnings;
@@ -23,7 +23,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 =head1 NAME
 
-var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen - code to execute during package installation
+var::packagesetup::ZnunyMarkTicketSeenUnseen - code to execute during package installation
 
 =head1 SYNOPSIS
 
@@ -41,7 +41,7 @@ create an object
 
     use Kernel::System::ObjectManager;
     local $Kernel::OM = Kernel::System::ObjectManager->new();
-    my $CodeObject    = $Kernel::OM->Get('var::packagesetup::Znuny4OTRSMarkTicketSeenUnseen');
+    my $CodeObject    = $Kernel::OM->Get('var::packagesetup::ZnunyMarkTicketSeenUnseen');
 
 =cut
 
@@ -143,28 +143,28 @@ sub _ArticleActionsGet {
     my $ArticleActions = {
         Internal => [    # Channel name (Internal, Phone, Email, Chat or Invalid)
             {
-                Key      => 'Znuny4OTRSMarkTicketSeenUnseen',
+                Key      => 'ZnunyMarkTicketSeenUnseen',
                 Module   => 'Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen',
                 Priority => 10,
             },
         ],
         Phone => [       # Channel name (Internal, Phone, Email, Chat or Invalid)
             {
-                Key      => 'Znuny4OTRSMarkTicketSeenUnseen',
+                Key      => 'ZnunyMarkTicketSeenUnseen',
                 Module   => 'Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen',
                 Priority => 10,
             },
         ],
         Email => [       # Channel name (Internal, Phone, Email, Chat or Invalid)
             {
-                Key      => 'Znuny4OTRSMarkTicketSeenUnseen',
+                Key      => 'ZnunyMarkTicketSeenUnseen',
                 Module   => 'Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen',
                 Priority => 10,
             },
         ],
         Chat => [        # Channel name (Internal, Phone, Email, Chat or Invalid)
             {
-                Key      => 'Znuny4OTRSMarkTicketSeenUnseen',
+                Key      => 'ZnunyMarkTicketSeenUnseen',
                 Module   => 'Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen',
                 Priority => 10,
             },

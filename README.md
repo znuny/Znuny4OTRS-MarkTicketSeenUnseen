@@ -9,9 +9,7 @@ With this extension you will be able to mark whole tickets as seen or unseen and
 
 **Prerequisites**
 
-- [Znuny4OTRS-Repo](https://www.znuny.com/#!/znuny4otrs)
-
-- OTRS 6
+- Znuny 6.1
 
 **Installation**
 
@@ -27,7 +25,7 @@ For download see [https://www.znuny.com/en/#!/addons](https://www.znuny.com/en/#
 
 **Commercial Support**
 
-For this extension and for OTRS in general visit [www.znuny.com](https://www.znuny.com). Looking forward to hear from you!
+For this extension and for Znuny in general visit [www.znuny.com](https://www.znuny.com). Looking forward to hear from you!
 
 Enjoy!
 
