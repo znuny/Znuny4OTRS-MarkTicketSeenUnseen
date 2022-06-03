@@ -28,6 +28,6 @@ For this extension and for Znuny in general visit [www.znuny.com](https://www.zn
 
 Enjoy!
 
- Your Znuny Team!
+Your Znuny Team!
 
- [www.znuny.com](https://www.znuny.com)
+[www.znuny.com](https://www.znuny.com)
