@@ -8,11 +8,11 @@ With this extension you will be able to mark whole tickets as seen or unseen and
 
 **Prerequisites**
 
-- Znuny 6.2
+- Znuny 6.3
 
 **Installation**
 
-Download the [package](https://addons.znuny.com/api/addon_repos/public/2100/latest) and install it via admin interface -> package manager.
+Install it via the package manager from the Znuny Open Source Add-ons or download the [package](https://addons.znuny.com/api/addon_repos/public/2333/latest) and upload/install it via admin interface -> package manager.
 
 **Configuration**
 
@@ -20,7 +20,7 @@ No further configuration required.
 
 **Download**
 
-Download the [latest version](https://addons.znuny.com/api/addon_repos/public/2100/latest).
+Download the [latest version](https://addons.znuny.com/api/addon_repos/public/2333/latest).
 
 **Commercial Support**
 
@@ -28,6 +28,6 @@ For this extension and for Znuny in general visit [www.znuny.com](https://www.zn
 
 Enjoy!
 
- Your Znuny Team!
+Your Znuny Team!
 
- [www.znuny.com](https://www.znuny.com)
+[www.znuny.com](https://www.znuny.com)

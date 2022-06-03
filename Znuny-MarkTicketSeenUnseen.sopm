@@ -13,7 +13,7 @@
     <ChangeLog Version="1.2.2" Date="2016-03-24 12:19:16 UTC">Fixed js bug: if ticket has no article.</ChangeLog>
     <ChangeLog Version="1.2.1" Date="2016-02-12 12:37:14 UTC">Fixed CodeUpgrade.</ChangeLog>
     <ChangeLog Version="1.2.0" Date="2015-12-11 10:42:55 UTC">Ported to OTRS 5.</ChangeLog>
-    <Framework>6.2.x</Framework>
+    <Framework>6.3.x</Framework>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
