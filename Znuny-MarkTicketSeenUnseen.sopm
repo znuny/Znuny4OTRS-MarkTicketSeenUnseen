@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.0">
     <Name>Znuny-MarkTicketSeenUnseen</Name>
-    <Version>6.0.7</Version>
+    <Version>6.4.1</Version>
+    <ChangeLog Version="6.4.1" Date="2022-07-27 22:20:08 +0200">initial release for Znuny 6.4</ChangeLog>
+    <ChangeLog Version="6.3.1" Date="2022-06-03 10:44:00 +0200">Ported to 6.3</ChangeLog>
     <ChangeLog Version="6.0.7" Date="2021-02-12 17:44:20 +0100">Happy new year. Tidied code.</ChangeLog>
     <ChangeLog Version="6.0.6" Date="2020-07-22 16:26:18 +0200">Issue #3: Fixed texts and translations of SysConfig options.</ChangeLog>
     <ChangeLog Version="6.0.5" Date="2018-11-16 11:19:17 +0100">Tidied code.</ChangeLog>
@@ -13,7 +15,7 @@
     <ChangeLog Version="1.2.2" Date="2016-03-24 12:19:16 UTC">Fixed js bug: if ticket has no article.</ChangeLog>
     <ChangeLog Version="1.2.1" Date="2016-02-12 12:37:14 UTC">Fixed CodeUpgrade.</ChangeLog>
     <ChangeLog Version="1.2.0" Date="2015-12-11 10:42:55 UTC">Ported to OTRS 5.</ChangeLog>
-    <Framework>6.3.x</Framework>
+    <Framework>6.4.x</Framework>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
@@ -41,5 +43,5 @@
     <CodeReinstall Type="post"><![CDATA[
         $Kernel::OM->Get('var::packagesetup::ZnunyMarkTicketSeenUnseen')->CodeReinstall();
     ]]></CodeReinstall>
-    <PackageMerge Name="Znuny4OTRS-MarkTicketSeenUnseen" TargetVersion="6.0.7"></PackageMerge>
+    <PackageMerge Name="Znuny4OTRS-MarkTicketSeenUnseen" TargetVersion="6.0.7"/>
 </otrs_package>
