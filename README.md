@@ -1,6 +1,6 @@
 ![Znuny logo](https://www.znuny.com/assets/images/logo_small.png)
 
-![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-MarkTicketSeenUnseen/dev)
+![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-MarkTicketSeenUnseen/rel-6_4)
 
 Mark tickets as seen and unseen
 =================
@@ -8,11 +8,11 @@ With this extension you will be able to mark whole tickets as seen or unseen and
 
 **Prerequisites**
 
-- Znuny 6.3
+- Znuny 6.4
 
 **Installation**
 
-Install it via the package manager from the Znuny Open Source Add-ons or download the [package](https://addons.znuny.com/api/addon_repos/public/2333/latest) and upload/install it via admin interface -> package manager.
+Install it via the package manager from the Znuny Open Source Add-ons or download the [package](https://addons.znuny.com/api/addon_repos/public/2394/latest) and upload/install it via admin interface -> package manager.
 
 **Configuration**
 
@@ -20,7 +20,7 @@ No further configuration required.
 
 **Download**
 
-Download the [latest version](https://addons.znuny.com/api/addon_repos/public/2333/latest).
+Download the [latest version](https://addons.znuny.com/api/addon_repos/public/2394/latest).
 
 **Commercial Support**
 
