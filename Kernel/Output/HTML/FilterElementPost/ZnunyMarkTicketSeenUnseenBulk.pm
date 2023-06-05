@@ -10,6 +10,7 @@ package Kernel::Output::HTML::FilterElementPost::ZnunyMarkTicketSeenUnseenBulk;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
