@@ -10,6 +10,7 @@ package Kernel::Output::HTML::FilterElementPost::ZnunyMarkTicketSeenUnseenBulk;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -49,15 +50,17 @@ sub Run {
             Data       => $YesNoOptions,
             Name       => $CurrentParam,
             SelectedID => $CurrentParamValue || 0,
+            Class      => 'Modernize',
         );
 
         my $CurrenParamTranslation = $LanguageObject->Translate( $ParamLabels{$CurrentParam} );
         my $ElementHTML            = <<HTML;
-<label for="$CurrentParam">$CurrenParamTranslation:</label>
+<div class="field-wrapper">
+<label for="$CurrentParam">$CurrenParamTranslation</label>
 <div class="Field">
     $SelectHTML
 </div>
-<div class="Clear"></div>
+</div>
 HTML
 
         ${ $Param{Data} } =~ s{(</fieldset>[^<]+</div>[^<]+</div>[^<]+<div \s class="Footer")}{$ElementHTML$1}xms;

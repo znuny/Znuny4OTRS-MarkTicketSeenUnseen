@@ -1,6 +1,6 @@
 ![Znuny logo](https://www.znuny.com/assets/images/logo_small.png)
 
-![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-MarkTicketSeenUnseen/rel-6_5)
+![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-MarkTicketSeenUnseen/rel-7_0)
 
 Mark tickets as seen and unseen
 =================
@@ -8,7 +8,7 @@ With this extension you will be able to mark whole tickets as seen or unseen and
 
 **Prerequisites**
 
-- Znuny 6.5
+- Znuny 7.0
 
 **Installation**
 

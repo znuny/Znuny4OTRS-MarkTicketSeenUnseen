@@ -2,7 +2,7 @@
 
 ## Mark tickets as read/unread
 
-In OTRS it is not possible to mark tickets (all articles of a ticket) as read or unread. This package adds this functionality to OTRS.
+In Znuny it is not possible to mark tickets (all articles of a ticket) as read or unread. This package adds this functionality to Znuny.
 
 In the ticket and article menu, appropriate links are available to mark a ticket or its articles as read or unread. Only the "mark unread" link is available in the article menu, since the article is automatically marked as read when it is read.
 

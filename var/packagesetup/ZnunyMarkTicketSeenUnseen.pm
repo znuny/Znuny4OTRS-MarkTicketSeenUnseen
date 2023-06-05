@@ -6,11 +6,10 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-package var::packagesetup::ZnunyMarkTicketSeenUnseen;    ## no critic
+package var::packagesetup::ZnunyMarkTicketSeenUnseen;
 
 use strict;
 use warnings;
-
 use utf8;
 
 our @ObjectDependencies = (
@@ -156,13 +155,6 @@ sub _ArticleActionsGet {
             },
         ],
         Email => [       # Channel name (Internal, Phone, Email, Chat or Invalid)
-            {
-                Key      => 'ZnunyMarkTicketSeenUnseen',
-                Module   => 'Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen',
-                Priority => 10,
-            },
-        ],
-        Chat => [        # Channel name (Internal, Phone, Email, Chat or Invalid)
             {
                 Key      => 'ZnunyMarkTicketSeenUnseen',
                 Module   => 'Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen',
