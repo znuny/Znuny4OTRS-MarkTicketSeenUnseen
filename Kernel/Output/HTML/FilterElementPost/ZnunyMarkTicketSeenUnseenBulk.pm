@@ -49,6 +49,7 @@ sub Run {
             Data       => $YesNoOptions,
             Name       => $CurrentParam,
             SelectedID => $CurrentParamValue || 0,
+            Class      => 'Modernize',
         );
 
         my $CurrenParamTranslation = $LanguageObject->Translate( $ParamLabels{$CurrentParam} );
