@@ -10,6 +10,7 @@ package Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 

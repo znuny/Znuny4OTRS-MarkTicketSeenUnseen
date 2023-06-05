@@ -19,7 +19,7 @@ sub Data {
     # SysConfig
     $Self->{Translation}->{"Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketUnseenRedirectDefaultURL' is used if no selection is made by the agent."}
         = "Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung 'MarkTicketUnseenRedirectDefaultURL' wird verwendet, falls der Agent keine Auswahl getroffen hat.";
-    $Self->{Translation}->{"Defines the redirect URL for setting a ticket article to 'unseen."}
+    $Self->{Translation}->{"Defines the redirect URL for setting a ticket article to 'unseen'."}
         = "Definiert den URL, zu dem umgeleitet wird, nachdem ein Artikel auf 'ungelesen' gesetzt wurde.";
     $Self->{Translation}->{"Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketSeenRedirectDefaultURL' is used if no selection is made by the agent."}
         = "Definiert die zur Verfügung stehenden Konfigurationsparameter in der Einstellungsansicht. Der Standard-Umleitungs-URL der SysConfig-Einstellung 'MarkTicketSeenRedirectDefaultURL' wird verwendet, falls der Agent keine Auswahl getroffen hat.";
@@ -41,13 +41,18 @@ sub Data {
         = 'Ticketartikel als (un)gelesen markieren';
     $Self->{Translation}->{'Mark ticket as (un)seen'}
         = 'Ticket als (un)gelesen markieren';
-    $Self->{Translation}->{'Dialog to show after marking a ticket as unseen'}
-        = 'Dialog, der angezeigt wird, nachdem ein Ticket als ungelesen markiert wurde.';
-    $Self->{Translation}->{'Dialog to show after marking a ticket as seen'} = 'Dialog, der angezeigt wird, nachdem ein Ticket als gelesen markiert wurde.';
+    $Self->{Translation}->{'Screen after marking as seen'}
+        = 'Ansicht nachdem als gelesen markiert wurde';
+    $Self->{Translation}->{'Configure which screen should be shown after marking a ticket or article as seen.'} = 'Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein Ticket oder Artikel als gelesen markiert wurde.';
+    $Self->{Translation}->{'Screen after marking as unseen'}
+        = 'Ansicht nachdem als ungelesen markiert wurde';
+    $Self->{Translation}->{'Configure which screen should be shown after marking a ticket or article as unseen.'} = 'Konfigurieren Sie, welche Oberfläche angezeigt werden soll, nachdem ein Ticket oder Artikel als ungelesen markiert wurde.';
     $Self->{Translation}->{'Mark as unseen'} = 'Als ungelesen markieren';
     $Self->{Translation}->{'Mark as seen'} = 'Als gelesen markieren';
     $Self->{Translation}->{'Mark ticket as unseen'} = 'Ticket als ungelesen markieren';
     $Self->{Translation}->{'Mark ticket as seen'} = 'Ticket als gelesen markieren';
+    $Self->{Translation}->{'Last viewed screen'} = 'Zuletzt angesehene Aktion';
+    $Self->{Translation}->{'Last viewed overview'} = 'Zuletzt angesehene Ansicht';
 
     # Templates and output filters
     $Self->{Translation}->{'Mark article as unseen'} = 'Artikel als ungelesen markieren';

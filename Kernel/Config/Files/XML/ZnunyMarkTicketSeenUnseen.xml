@@ -28,8 +28,8 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
                 <Item Key="PreferenceGroup">Miscellaneous</Item>
-                <Item Key="Label" Translatable="1">Dialog to show after marking a ticket as unseen</Item>
-                <Item Key="Key" Translatable="1">Dialog to show after marking a ticket as unseen</Item>
+                <Item Key="Label" Translatable="1">Screen after marking as unseen</Item>
+                <Item Key="Desc" Translatable="1">Configure which screen should be shown after marking a ticket or article as unseen.</Item>
                 <Item Key="Data">
                     <Hash>
                         <Item Key="">-</Item>
@@ -40,6 +40,8 @@
                         <Item Key="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
                         <Item Key="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
                         <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
+                        <Item Key="LastScreenView" Translatable="1">Last viewed screen</Item>
+                        <Item Key="LastScreenOverview" Translatable="1">Last viewed overview</Item>
                     </Hash>
                 </Item>
                 <Item Key="DataSelected"></Item>
@@ -61,6 +63,8 @@
                 <Item ValueType="Option" Value="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
+                <Item ValueType="Option" Value="LastScreenView" Translatable="1">Last viewed screen</Item>
+                <Item ValueType="Option" Value="LastScreenOverview" Translatable="1">Last viewed overview</Item>
             </Item>
         </Value>
     </Setting>
@@ -71,8 +75,8 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Preferences::Generic</Item>
                 <Item Key="PreferenceGroup">Miscellaneous</Item>
-                <Item Key="Label" Translatable="1">Dialog to show after marking a ticket as seen</Item>
-                <Item Key="Key" Translatable="1">Dialog to show after marking a ticket as seen</Item>
+                <Item Key="Label" Translatable="1">Screen after marking as seen</Item>
+                <Item Key="Desc" Translatable="1">Configure which screen should be shown after marking a ticket or article as seen.</Item>
                 <Item Key="Data">
                     <Hash>
                         <Item Key="">-</Item>
@@ -83,6 +87,8 @@
                         <Item Key="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
                         <Item Key="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
                         <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
+                        <Item Key="LastScreenView" Translatable="1">Last viewed screen</Item>
+                        <Item Key="LastScreenOverview" Translatable="1">Last viewed overview</Item>
                     </Hash>
                 </Item>
                 <Item Key="DataSelected"></Item>
@@ -104,6 +110,8 @@
                 <Item ValueType="Option" Value="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
+                <Item ValueType="Option" Value="LastScreenView" Translatable="1">Last viewed screen</Item>
+                <Item ValueType="Option" Value="LastScreenOverview" Translatable="1">Last viewed overview</Item>
             </Item>
         </Value>
     </Setting>
@@ -194,6 +202,15 @@
                 </Hash>
                 </Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="LastViews###ActionIgnore###ZnunyMarkTicketSeenUnseen" Required="0" Valid="1">
+        <Description Translatable="1">List of actions that will be ignored.</Description>
+        <Navigation>Core::Znuny::MarkTicketSeenUnseen</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">AgentTicketMarkSeenUnseen</Item>
+            </Array>
         </Value>
     </Setting>
 </otrs_config>

@@ -10,12 +10,14 @@ package Kernel::Modules::AgentTicketMarkSeenUnseen;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
-    'Kernel::System::Ticket::Article',
+    'Kernel::System::AuthSession',
     'Kernel::System::Ticket',
+    'Kernel::System::Ticket::Article',
     'Kernel::System::User',
     'Kernel::System::Web::Request',
 );
@@ -40,6 +42,7 @@ sub Run {
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
     my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
     my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
 
     my %GetParam;
     for my $Param (qw(TicketID ArticleID Subaction)) {
@@ -144,6 +147,13 @@ sub Run {
     my $RedirectURL = $UserPreferences{ 'UserMarkTicket' . $GetParam{Subaction} . 'RedirectURL' };
     $RedirectURL ||= $ConfigObject->Get( 'MarkTicket' . $GetParam{Subaction} . 'RedirectDefaultURL' );
     $RedirectURL ||= 'Action=AgentTicketZoom;TicketID=###TicketID###';
+
+    if ( $RedirectURL =~ m{LastScreenView|LastScreenOverview}i ) {
+        my %SessionData = $SessionObject->GetSessionIDData(
+            SessionID => $Self->{SessionID},
+        );
+        $RedirectURL = $SessionData{$RedirectURL};
+    }
 
     REPLACE:
     for my $ReplaceParam (qw(TicketID ArticleID ArticleIndex)) {
