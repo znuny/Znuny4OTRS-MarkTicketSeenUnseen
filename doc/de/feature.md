@@ -2,7 +2,7 @@
 
 ## Tickets als gelesen/ungelesen markieren
 
-In Znuny ist es nicht möglich, Tickets (also alle Artikel eines Tickets) als gelesen oder ungelesen zu markieren. Dieses Paket ergänzt Znuny um diese Funktionalität.
+Dieses Paket ergänzt Znuny um die Möglichkeit, Tickets (also alle Artikel eines Tickets) als gelesen oder ungelesen zu markieren.
 
 Im Ticket- und Artikel-Menü stehen entsprechende Links zur Verfügung, um ein Ticket oder dessen Artikel als gelesen oder ungelesen zu markieren. Im Artikel-Menü steht nur der "ungelesen markieren"-Link zur Verfügung, da der Artikel beim Lesen bereits automatisch als gelesen markiert wird.
 
