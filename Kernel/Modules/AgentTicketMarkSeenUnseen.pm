@@ -145,8 +145,12 @@ sub Run {
     );
 
     my $RedirectURL = $UserPreferences{ 'UserMarkTicket' . $GetParam{Subaction} . 'RedirectURL' };
+
+    # Fix for removed option "TicketZoom" for redirection. See issue #11.
+    $RedirectURL = undef if $RedirectURL =~ m{TicketZoom};
+
     $RedirectURL ||= $ConfigObject->Get( 'MarkTicket' . $GetParam{Subaction} . 'RedirectDefaultURL' );
-    $RedirectURL ||= 'Action=AgentTicketZoom;TicketID=###TicketID###';
+    $RedirectURL ||= 'LastScreenOverview';
 
     if ( $RedirectURL =~ m{LastScreenView|LastScreenOverview}i ) {
         my %SessionData = $SessionObject->GetSessionIDData(

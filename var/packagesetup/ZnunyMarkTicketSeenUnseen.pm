@@ -15,6 +15,8 @@ use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Cache',
+    'Kernel::System::DB',
     'Kernel::System::Log',
     'Kernel::System::ZnunyHelper',
 );
@@ -78,6 +80,8 @@ sub CodeInstall {
         );
         return;
     }
+
+    return if !$Self->_RemoveDeprecatedUserPreferences(%Param);
 
     return 1;
 }
@@ -172,6 +176,49 @@ sub _ArticleActionsGet {
     };
 
     return $ArticleActions;
+}
+
+sub _RemoveDeprecatedUserPreferences {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
+    my %PreferencesToRemove = (
+        MarkTicketUnseenRedirectURL => [
+            'Action=AgentTicketZoom;TicketID=###TicketID####1',
+            'LastScreenView',
+        ],
+        MarkTicketSeenRedirectURL => [
+            'Action=AgentTicketZoom;TicketID=###TicketID####1',
+        ],
+    );
+
+    my $SQL = '
+        DELETE FROM user_preferences
+        WHERE       preferences_key = ?
+                    AND preferences_value = ?
+    ';
+
+    for my $PreferenceKey ( sort keys %PreferencesToRemove ) {
+        for my $PreferenceValue ( @{ $PreferencesToRemove{$PreferenceKey} } ) {
+            my @Bind = (
+                \$PreferenceKey,
+                \$PreferenceValue,
+            );
+
+            return if !$DBObject->Do(
+                SQL  => $SQL,
+                Bind => \@Bind,
+            );
+        }
+    }
+
+    $CacheObject->CleanUp(
+        Type => 'User',
+    );
+
+    return 1;
 }
 
 1;
