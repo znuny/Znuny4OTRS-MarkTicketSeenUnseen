@@ -39,8 +39,6 @@
                         <Item Key="Action=AgentTicketQueue" Translatable="1">Queue view</Item>
                         <Item Key="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
                         <Item Key="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
-                        <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
-                        <Item Key="LastScreenView" Translatable="1">Last viewed screen</Item>
                         <Item Key="LastScreenOverview" Translatable="1">Last viewed overview</Item>
                     </Hash>
                 </Item>
@@ -62,8 +60,6 @@
                 <Item ValueType="Option" Value="Action=AgentTicketQueue" Translatable="1">Queue view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
-                <Item ValueType="Option" Value="LastScreenView" Translatable="1">Last viewed screen</Item>
                 <Item ValueType="Option" Value="LastScreenOverview" Translatable="1">Last viewed overview</Item>
             </Item>
         </Value>
@@ -86,7 +82,6 @@
                         <Item Key="Action=AgentTicketQueue" Translatable="1">Queue view</Item>
                         <Item Key="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
                         <Item Key="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
-                        <Item Key="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
                         <Item Key="LastScreenView" Translatable="1">Last viewed screen</Item>
                         <Item Key="LastScreenOverview" Translatable="1">Last viewed overview</Item>
                     </Hash>
@@ -109,7 +104,6 @@
                 <Item ValueType="Option" Value="Action=AgentTicketQueue" Translatable="1">Queue view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketEscalationView" Translatable="1">Escalation view</Item>
                 <Item ValueType="Option" Value="Action=AgentTicketStatusView" Translatable="1">Status view</Item>
-                <Item ValueType="Option" Value="Action=AgentTicketZoom;TicketID=###TicketID####1" Translatable="1">Ticket Zoom</Item>
                 <Item ValueType="Option" Value="LastScreenView" Translatable="1">Last viewed screen</Item>
                 <Item ValueType="Option" Value="LastScreenOverview" Translatable="1">Last viewed overview</Item>
             </Item>
