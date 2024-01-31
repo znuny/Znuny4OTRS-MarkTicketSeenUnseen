@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_package version="1.0">
     <Name>Znuny-MarkTicketSeenUnseen</Name>
-    <Version>7.0.1</Version>
+    <Version>7.0.2</Version>
     <Framework>7.0.x</Framework>
     <Vendor>Znuny GmbH</Vendor>
     <URL>http://znuny.com/</URL>
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">Mark whole tickets or single articles as unseen or seen.</Description>
     <Description Lang="de">Komplette Tickets oder einzelne Artikel als ungelesen oder gelesen markieren.</Description>
+    <ChangeLog Version="7.0.2" Date="2024-01-31 11:30:04 +0100">Removed support for ticket zoom as redirection URL because it always would automatically mark the selected article as seen again.</ChangeLog>
     <ChangeLog Version="7.0.1" Date="2023-06-05 09:56:57 +0200">Initial release for Znuny 7</ChangeLog>
     <ChangeLog Version="6.5.1" Date="2023-02-20 13:37:57 +0100">Initial release for Znuny 6.5.</ChangeLog>
     <ChangeLog Version="6.4.1" Date="2022-07-27 22:20:08 +0200">initial release for Znuny 6.4</ChangeLog>
