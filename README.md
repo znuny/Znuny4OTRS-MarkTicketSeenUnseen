@@ -1,9 +1,7 @@
 ![Znuny logo](https://www.znuny.com/assets/images/logo_small.png)
 
-![Build status](https://badge.proxy.znuny.com/Znuny4OTRS-MarkTicketSeenUnseen/rel-6_5)
-
-Mark tickets as seen and unseen
-=================
+Znuny-MarkTicketSeenUnseen
+==========================
 With this extension you will be able to mark whole tickets as seen or unseen and articles as unseen again. It's possible to mark single tickets or multiple tickets via the bulk action.
 
 **Prerequisites**
@@ -12,22 +10,17 @@ With this extension you will be able to mark whole tickets as seen or unseen and
 
 **Installation**
 
-Install it via the package manager from the Znuny Open Source Add-ons or download the [package](https://addons.znuny.com/api/addon_repos/public/2394/latest) and upload/install it via admin interface -> package manager.
+Use the online repository **Znuny Open Source Add-ons** from the package manager to install the add-on. From the command line use this command: `bin/znuny.Console.pl Admin::Package::Install https://addons.znuny.com/public/:Znuny-MarkTicketSeenUnseen`
 
 **Configuration**
 
 No further configuration required.
 
-**Download**
-
-Download the [latest version](https://addons.znuny.com/api/addon_repos/public/2394/latest).
-
 **Commercial Support**
 
-For this extension and for Znuny in general visit [www.znuny.com](https://www.znuny.com). Looking forward to hear from you!
+For this add-on and for Znuny in general visit [www.znuny.com](https://www.znuny.com). Looking forward to hear from you.
 
-Enjoy!
 
 Your Znuny Team!
 
-[www.znuny.com](https://www.znuny.com)
+[https://www.znuny.com](https://www.znuny.com)
