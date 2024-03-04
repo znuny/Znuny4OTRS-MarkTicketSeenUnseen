@@ -63,9 +63,14 @@ sub Run {
         );
     }
 
-    my @ArticleIDs = $ArticleObject->ArticleIndex(
+    my @Articles = $ArticleObject->ArticleList(
         TicketID => $GetParam{TicketID},
     );
+    
+    my @ArticleIDs = ();
+    foreach my $Article (@Articles) {
+        push(@ArticleIDs, $Article->{ArticleID});
+    }
 
     if ( $GetParam{ArticleID} ) {
         if ( !scalar grep { $GetParam{ArticleID} eq $_ } @ArticleIDs ) {
