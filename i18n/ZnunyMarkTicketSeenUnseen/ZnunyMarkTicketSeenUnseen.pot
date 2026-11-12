@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ZnunyMarkTicketSeenUnseen\n"
+"POT-Creation-Date: 2026-11-12 13:55+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+msgid "Mark article as unseen"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+msgid "Mark as unseen"
+msgstr ""
+
+#. SysConfig
+msgid "Configure which screen should be shown after marking a ticket or article as seen."
+msgstr ""
+
+#. SysConfig
+msgid "Configure which screen should be shown after marking a ticket or article as unseen."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketSeenRedirectDefaultURL' is used if no selection is made by the agent."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketUnseenRedirectDefaultURL' is used if no selection is made by the agent."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the redirect URL for setting a ticket article to 'seen'."
+msgstr ""
+
+#. SysConfig
+msgid "Defines the redirect URL for setting a ticket article to 'unseen'."
+msgstr ""
+
+#. SysConfig
+msgid "Last viewed overview"
+msgstr ""
+
+#. SysConfig
+msgid "Last viewed screen"
+msgstr ""
+
+#. SysConfig
+msgid "Mark ticket as seen"
+msgstr ""
+
+#. SysConfig
+msgid "Mark ticket as unseen"
+msgstr ""
+
+#. SysConfig
+msgid "Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as seen."
+msgstr ""
+
+#. SysConfig
+msgid "Registers a link in the ticket menu of ticket overviews to mark all articles of the ticket as unseen."
+msgstr ""
+
+#. SysConfig
+msgid "Registers a link in the ticket menu to mark a ticket as seen."
+msgstr ""
+
+#. SysConfig
+msgid "Registers a link in the ticket menu to mark a ticket as unseen."
+msgstr ""
+
+#. SysConfig
+msgid "Registers an output filter that adds the 'Mark tickets as unseen' selection to the bulk view."
+msgstr ""
+
+#. SysConfig
+msgid "Screen after marking as seen"
+msgstr ""
+
+#. SysConfig
+msgid "Screen after marking as unseen"
+msgstr ""
