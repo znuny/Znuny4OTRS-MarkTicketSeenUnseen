@@ -8,6 +8,7 @@
     <License>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, November 2007</License>
     <Description Lang="en">Mark whole tickets or single articles as unseen or seen.</Description>
     <Description Lang="de">Komplette Tickets oder einzelne Artikel als ungelesen oder gelesen markieren.</Description>
+    <Description Lang="hu">Teljes jegyek vagy önálló bejegyzések megjelölése olvasatlanként vagy olvasottként.</Description>
     <ChangeLog Version="6.5.4" Date="2025-10-31 18:18:37 +0100">Fixed Perl warning on uninitialized redirect URL.</ChangeLog>
     <ChangeLog Version="6.5.3" Date="2024-01-31 11:13:49 +0100">Removed support for ticket zoom as redirection URL because it always would automatically mark the selected article as seen again.</ChangeLog>
     <ChangeLog Version="6.5.2" Date="2023-06-05 09:58:07 +0200">- Modernized input field in bulk action&#13;
@@ -29,6 +30,7 @@
     <Filelist>
         <File Permission="660" Location="Kernel/Config/Files/XML/ZnunyMarkTicketSeenUnseen.xml"/>
         <File Permission="660" Location="Kernel/Language/de_ZnunyMarkTicketSeenUnseen.pm"/>
+        <File Permission="660" Location="Kernel/Language/hu_ZnunyMarkTicketSeenUnseen.pm"/>
         <File Permission="660" Location="Kernel/Modules/AgentTicketMarkSeenUnseen.pm"/>
         <File Permission="660" Location="Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm"/>
         <File Permission="660" Location="Kernel/Output/HTML/FilterElementPost/ZnunyMarkTicketSeenUnseenBulk.pm"/>
